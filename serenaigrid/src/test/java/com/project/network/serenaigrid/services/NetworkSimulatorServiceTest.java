@@ -11,9 +11,12 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.project.network.serenaigrid.networkManagement.models.Network;
@@ -25,6 +28,7 @@ import com.project.network.serenaigrid.networkManagement.services.exceptions.Net
 import com.project.network.serenaigrid.networkManagement.services.exceptions.NetworkSimulatorException;
 
 @SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class NetworkSimulatorServiceTest {
 
     @Mock
@@ -35,19 +39,11 @@ public class NetworkSimulatorServiceTest {
     
     @InjectMocks
     private NetworkSimulatorService networkSimulatorService; // Servizio da testare
-
-//    private Network mockNetwork;
-//
-//    @BeforeEach
-//    public void setUp() {
-//        // Inizializzazione del mock per Network
-//        mockNetwork = new Network();
-//        mockNetwork.setNetworkId("network-id");
-//        mockNetwork.setName("Test Network");
-//        mockNetwork.setType("LAN");
-//        mockNetwork.setNodeCount(5);
-//        mockNetwork.setDescription("Test description");
-//    }
+    
+    @BeforeEach
+    public void setUp() {
+        // Impostazioni prima di ogni test (se necessarie)
+    }
 
     @Test
     public void testSimulateNetworkSuccess() {
