@@ -12,13 +12,12 @@ import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Device;
+import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Quantity;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.StringType;
 import org.springframework.stereotype.Service;
-
-import org.hl7.fhir.r4.model.Extension;
 
 @Service
 public class FHIRDataGeneratorService {
@@ -66,7 +65,7 @@ public class FHIRDataGeneratorService {
             // Estensioni per la rete
             emergency.addExtension(createNetworkExtension("http://example.org/fhir/network-priority", "High"));
             emergency.addExtension(createNetworkExtension("http://example.org/fhir/network-latency", random.nextDouble() * 200, "ms"));
-
+            
             emergencies.add(emergency);
         }
 

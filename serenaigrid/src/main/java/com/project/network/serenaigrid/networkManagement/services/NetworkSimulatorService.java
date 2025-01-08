@@ -7,8 +7,8 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.network.serenaigrid.networkManagement.models.Network;
-import com.project.network.serenaigrid.networkManagement.models.NetworkDetails;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDO;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDetailsDO;
 import com.project.network.serenaigrid.networkManagement.repositories.NetworkDetailsRepository;
 import com.project.network.serenaigrid.networkManagement.repositories.NetworkRepository;
 import com.project.network.serenaigrid.networkManagement.services.exceptions.NetworkNotFoundException;
@@ -23,17 +23,17 @@ public class NetworkSimulatorService {
 	@Autowired
 	private NetworkDetailsRepository dataRepository;
 
-	public List<NetworkDetails> simulateNetwork(String networkId) {
+	public List<NetworkDetailsDO> simulateNetwork(String networkId) {
 		try {
 			// Recupera l'oggetto Network o lancia un'eccezione se non trovato
-			Network network = networkRepository.findById(networkId)
+			NetworkDO network = networkRepository.findById(networkId)
 					.orElseThrow(() -> new NetworkNotFoundException("Network not found with ID: " + networkId));
 
-			List<NetworkDetails> simulatedData = new ArrayList<>();
+			List<NetworkDetailsDO> simulatedData = new ArrayList<>();
 			Random random = new Random();
 
 			for (int i = 0; i < network.getNodeCount(); i++) {
-				NetworkDetails data = NetworkDetails.builder()
+				NetworkDetailsDO data = NetworkDetailsDO.builder()
 						.ipAddress(generateIpAddress(network.getType()))
 						.bandwidthUsage(random.nextDouble() * (network.getType().equalsIgnoreCase("WAN") ? 100 : 1000))
 						.latency(generateLatency(network.getType(), random))

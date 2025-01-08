@@ -19,8 +19,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.project.network.serenaigrid.networkManagement.models.Network;
-import com.project.network.serenaigrid.networkManagement.models.NetworkDetails;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDO;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDetailsDO;
 import com.project.network.serenaigrid.networkManagement.repositories.NetworkDetailsRepository;
 import com.project.network.serenaigrid.networkManagement.repositories.NetworkRepository;
 import com.project.network.serenaigrid.networkManagement.services.NetworkSimulatorService;
@@ -48,13 +48,13 @@ public class NetworkSimulatorServiceTest {
     @Test
     public void testSimulateNetworkSuccess() {
         // Crea una rete da registrare
-        Network network = Network.builder().name("Test Network").type("LAN").nodeCount(5).build();
+        NetworkDO network = NetworkDO.builder().name("Test Network").type("LAN").nodeCount(5).build();
         
         // Configura il comportamento del mock del repository
         when(networkRepository.findById(network.getNetworkId())).thenReturn(Optional.of(network));
 
         // Esegui il metodo di simulazione
-        List<NetworkDetails> simulatedData = networkSimulatorService.simulateNetwork(network.getNetworkId());
+        List<NetworkDetailsDO> simulatedData = networkSimulatorService.simulateNetwork(network.getNetworkId());
 
         // Verifica che la simulazione sia andata a buon fine
         assertNotNull(simulatedData);

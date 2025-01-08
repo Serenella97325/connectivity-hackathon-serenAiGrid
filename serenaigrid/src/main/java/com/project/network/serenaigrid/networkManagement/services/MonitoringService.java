@@ -6,13 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.network.serenaigrid.networkManagement.dtos.ApiResponse;
-import com.project.network.serenaigrid.networkManagement.models.MonitoringData;
-import com.project.network.serenaigrid.networkManagement.models.Network;
-import com.project.network.serenaigrid.networkManagement.models.NetworkDetails;
+import com.project.network.serenaigrid.networkManagement.models.MonitoringDataDO;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDO;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDetailsDO;
 import com.project.network.serenaigrid.networkManagement.repositories.NetworkRepository;
 import com.project.network.serenaigrid.networkManagement.services.exceptions.NetworkNotFoundException;
 import com.project.network.serenaigrid.networkManagement.services.exceptions.NetworkSimulatorException;
+import com.project.network.serenaigrid.utils.ApiResponse;
 
 @Service
 public class MonitoringService {
@@ -23,20 +23,20 @@ public class MonitoringService {
 	@Autowired
 	private NetworkSimulatorService simulatorService;
 
-	public ApiResponse<MonitoringData> collectMonitoringData(String networkId) {
+	public ApiResponse<MonitoringDataDO> collectMonitoringData(String networkId) {
 		try {
 			// Ottieni i dettagli della rete
-			Network network = networkRepository.findById(networkId)
+			NetworkDO network = networkRepository.findById(networkId)
 					.orElseThrow(() -> new NetworkNotFoundException("Network not found"));
 
 			// Simula i dati di rete
-			List<NetworkDetails> simulatedData = simulatorService.simulateNetwork(networkId);
+			List<NetworkDetailsDO> simulatedData = simulatorService.simulateNetwork(networkId);
 			if (simulatedData == null || simulatedData.isEmpty()) {
 				throw new NetworkSimulatorException("Simulation failed");
 			}
 
 			// Combina e restituisci i dati
-			MonitoringData monitoringData = new MonitoringData(network, simulatedData, LocalDateTime.now());
+			MonitoringDataDO monitoringData = new MonitoringDataDO(network, simulatedData, LocalDateTime.now());
 			return ApiResponse.success(monitoringData);
 
 		} catch (NetworkNotFoundException ex) {

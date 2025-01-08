@@ -5,12 +5,12 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.project.network.serenaigrid.networkManagement.models.Network;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDO;
 
 @Repository
-public interface NetworkRepository extends JpaRepository<Network, String> {
+public interface NetworkRepository extends JpaRepository<NetworkDO, String> {
 	
-	Optional<Network> findById(String networkId);
+	Optional<NetworkDO> findById(String networkId);
 
 	// Network findByNetworkId(String networkId);
 }

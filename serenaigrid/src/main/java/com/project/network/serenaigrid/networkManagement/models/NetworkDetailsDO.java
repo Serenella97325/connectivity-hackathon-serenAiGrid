@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NetworkDetails implements Serializable {
+public class NetworkDetailsDO implements Serializable {
 
 	/**
 	 * 
@@ -40,5 +40,5 @@ public class NetworkDetails implements Serializable {
     @ManyToOne
     @JoinColumn(name = "network_id", nullable = false) // Foreign key
     @JsonIgnore
-    private Network network; // Relazione con la rete
+    private NetworkDO network; // Relazione con la rete
 }

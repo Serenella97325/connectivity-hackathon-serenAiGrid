@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.network.serenaigrid.networkManagement.models.NetworkDetails;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDetailsDO;
 import com.project.network.serenaigrid.networkManagement.services.NetworkSimulatorService;
 
 @RestController
@@ -21,9 +21,9 @@ public class NetworkSimulatorController {
     private NetworkSimulatorService simulatorService;
 
     @GetMapping("/simulate/{networkId}")
-    public ResponseEntity<List<NetworkDetails>> simulateNetwork(@PathVariable("networkId") String networkId) {
+    public ResponseEntity<List<NetworkDetailsDO>> simulateNetwork(@PathVariable("networkId") String networkId) {
         // Chiamata al servizio per simulare la rete
-        List<NetworkDetails> response = simulatorService.simulateNetwork(networkId);
+        List<NetworkDetailsDO> response = simulatorService.simulateNetwork(networkId);
         
         // Verifica se la simulazione è andata a buon fine
         if (!response.isEmpty()) {

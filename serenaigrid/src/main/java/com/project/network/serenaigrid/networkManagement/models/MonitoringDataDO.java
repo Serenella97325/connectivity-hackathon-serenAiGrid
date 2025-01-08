@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MonitoringData {
+public class MonitoringDataDO {
 	
-    private Network networkDetails;
+    private NetworkDO networkDetails;
     
-    private List<NetworkDetails> networkMetrics;
+    private List<NetworkDetailsDO> networkMetrics;
     
     private LocalDateTime timestamp;
 }

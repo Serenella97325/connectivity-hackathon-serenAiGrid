@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Network implements Serializable {
+public class NetworkDO implements Serializable {
 
 	/**
 	 * 
@@ -44,6 +44,6 @@ public class Network implements Serializable {
 	@OneToMany(mappedBy = "network", cascade = CascadeType.ALL, orphanRemoval = true)
 	@Builder.Default // Garantisce che l'inizializzazione sia rispettata anche con il builder
 	@JsonIgnore
-	private List<NetworkDetails> simulatedData = new ArrayList<>(); // Inizializzazione
+	private List<NetworkDetailsDO> simulatedData = new ArrayList<>(); // Inizializzazione
 
 }

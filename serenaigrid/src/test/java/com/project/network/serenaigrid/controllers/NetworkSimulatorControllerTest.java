@@ -16,8 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.project.network.serenaigrid.networkManagement.controllers.NetworkSimulatorController;
-import com.project.network.serenaigrid.networkManagement.models.Network;
-import com.project.network.serenaigrid.networkManagement.models.NetworkDetails;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDO;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDetailsDO;
 import com.project.network.serenaigrid.networkManagement.services.NetworkSimulatorService;
 
 @SpringBootTest
@@ -40,7 +40,7 @@ public class NetworkSimulatorControllerTest {
     public void testSimulateNetwork() throws Exception {
 
     	// Creazione dell'oggetto Network
-    	Network network = new Network();
+    	NetworkDO network = new NetworkDO();
     	network.setNetworkId("1");
     	network.setName("Test Network");
     	network.setType("LAN");
@@ -48,14 +48,14 @@ public class NetworkSimulatorControllerTest {
     	network.setDescription("Description for Test Network");
 
     	// Creazione degli oggetti NetworkData associati alla rete
-    	NetworkDetails networkData1 = NetworkDetails.builder()
+    	NetworkDetailsDO networkData1 = NetworkDetailsDO.builder()
     	        .ipAddress("192.168.1.1")
     	        .bandwidthUsage(100.0)
     	        .latency(10.0)
     	        .network(network) // Associa l'oggetto Network
     	        .build();
 
-    	NetworkDetails networkData2 = NetworkDetails.builder()
+    	NetworkDetailsDO networkData2 = NetworkDetailsDO.builder()
     	        .ipAddress("192.168.1.2")
     	        .bandwidthUsage(150.0)
     	        .latency(20.0)

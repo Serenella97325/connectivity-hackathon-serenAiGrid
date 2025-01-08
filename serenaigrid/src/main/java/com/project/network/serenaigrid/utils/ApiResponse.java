@@ -1,4 +1,4 @@
-package com.project.network.serenaigrid.networkManagement.dtos;
+package com.project.network.serenaigrid.utils;
 
 import java.util.List;
 

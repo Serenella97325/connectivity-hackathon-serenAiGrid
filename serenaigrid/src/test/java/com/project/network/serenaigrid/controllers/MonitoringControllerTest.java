@@ -19,11 +19,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.project.network.serenaigrid.networkManagement.controllers.MonitoringController;
-import com.project.network.serenaigrid.networkManagement.dtos.ApiResponse;
-import com.project.network.serenaigrid.networkManagement.models.MonitoringData;
-import com.project.network.serenaigrid.networkManagement.models.Network;
-import com.project.network.serenaigrid.networkManagement.models.NetworkDetails;
+import com.project.network.serenaigrid.networkManagement.models.MonitoringDataDO;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDO;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDetailsDO;
 import com.project.network.serenaigrid.networkManagement.services.MonitoringService;
+import com.project.network.serenaigrid.utils.ApiResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -48,7 +48,7 @@ public class MonitoringControllerTest {
         String networkId = "testNetworkId";
         
         // Costruisco l'oggetto Network
-        Network mockNetwork = Network.builder()
+        NetworkDO mockNetwork = NetworkDO.builder()
                 .networkId(networkId)
                 .name("Test Network")
                 .type("LAN")
@@ -57,7 +57,7 @@ public class MonitoringControllerTest {
                 .build();
 
         // Costruisco una lista di NetworkDetails
-        NetworkDetails mockNetworkDetails = NetworkDetails.builder()
+        NetworkDetailsDO mockNetworkDetails = NetworkDetailsDO.builder()
                 .id("testDetailsId")
                 .ipAddress("192.168.0.1")
                 .bandwidthUsage(500)
@@ -65,17 +65,17 @@ public class MonitoringControllerTest {
                 .network(mockNetwork) // Associa il Network
                 .build();
 
-        List<NetworkDetails> mockNetworkDetailsList = Arrays.asList(mockNetworkDetails);
+        List<NetworkDetailsDO> mockNetworkDetailsList = Arrays.asList(mockNetworkDetails);
 
         // Costruisco l'oggetto MonitoringData
-        MonitoringData mockMonitoringData = MonitoringData.builder()
+        MonitoringDataDO mockMonitoringData = MonitoringDataDO.builder()
                 .networkDetails(mockNetwork)
                 .networkMetrics(mockNetworkDetailsList)
                 .timestamp(LocalDateTime.now())
                 .build();
 
         // Costruisco l'ApiResponse di successo
-        ApiResponse<MonitoringData> mockApiResponse = ApiResponse.success(mockMonitoringData);
+        ApiResponse<MonitoringDataDO> mockApiResponse = ApiResponse.success(mockMonitoringData);
 
         // Stub del servizio
         when(monitoringService.collectMonitoringData(networkId)).thenReturn(mockApiResponse);

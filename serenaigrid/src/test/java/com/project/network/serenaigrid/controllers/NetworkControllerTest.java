@@ -20,9 +20,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.project.network.serenaigrid.networkManagement.controllers.NetworkController;
-import com.project.network.serenaigrid.networkManagement.dtos.ApiResponse;
-import com.project.network.serenaigrid.networkManagement.models.Network;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDO;
 import com.project.network.serenaigrid.networkManagement.services.NetworkService;
+import com.project.network.serenaigrid.utils.ApiResponse;
 
 @SpringBootTest
 public class NetworkControllerTest {
@@ -43,7 +43,7 @@ public class NetworkControllerTest {
     @Test
     public void testRegisterNetwork_Success() throws Exception {
         // Prepariamo un oggetto mock di rete
-        Network mockNetwork = Network.builder()
+        NetworkDO mockNetwork = NetworkDO.builder()
                 .name("Test Network")
                 .type("LAN")
                 .nodeCount(5)
@@ -51,10 +51,10 @@ public class NetworkControllerTest {
                 .build();
 
         // Costruisci una risposta di successo (ApiResponse)
-        ApiResponse<Network> mockApiResponse = ApiResponse.success(mockNetwork);
+        ApiResponse<NetworkDO> mockApiResponse = ApiResponse.success(mockNetwork);
 
         // Configurazione dello stub del servizio
-        when(networkService.registerNetwork(any(Network.class))).thenReturn(mockApiResponse);
+        when(networkService.registerNetwork(any(NetworkDO.class))).thenReturn(mockApiResponse);
 
         // Eseguiamo la richiesta POST per registrare una rete
         mockMvc.perform(post("/network/register")
@@ -77,7 +77,7 @@ public class NetworkControllerTest {
     @Test
     public void testRegisterNetwork_Failure() throws Exception {
         // Simula un errore nel servizio (esempio NetworkServiceException)
-        when(networkService.registerNetwork(any(Network.class))).thenReturn(ApiResponse.failure("Error while registering the network"));
+        when(networkService.registerNetwork(any(NetworkDO.class))).thenReturn(ApiResponse.failure("Error while registering the network"));
 
         // Eseguiamo la richiesta POST per registrare una rete
         mockMvc.perform(post("/network/register")
@@ -98,14 +98,14 @@ public class NetworkControllerTest {
     @Test
     public void testListNetworks_Success() throws Exception {
         // Prepariamo una lista di reti mock
-        Network mockNetwork1 = Network.builder()
+        NetworkDO mockNetwork1 = NetworkDO.builder()
                 .name("Network 1")
                 .type("LAN")
                 .nodeCount(10)
                 .description("Description 1")
                 .build();
 
-        Network mockNetwork2 = Network.builder()
+        NetworkDO mockNetwork2 = NetworkDO.builder()
                 .name("Network 2")
                 .type("WAN")
                 .nodeCount(20)
@@ -113,7 +113,7 @@ public class NetworkControllerTest {
                 .build();
 
         // Configuriamo lo stub del servizio per restituire una lista di reti
-        ApiResponse<List<Network>> mockApiResponse = ApiResponse.success(Arrays.asList(mockNetwork1, mockNetwork2));
+        ApiResponse<List<NetworkDO>> mockApiResponse = ApiResponse.success(Arrays.asList(mockNetwork1, mockNetwork2));
         when(networkService.getAllNetworks()).thenReturn(mockApiResponse);
 
         // Eseguiamo la richiesta GET per ottenere la lista delle reti
@@ -143,7 +143,7 @@ public class NetworkControllerTest {
         String networkId = "testNetworkId";
     	
     	// Prepariamo un oggetto mock di rete
-        Network mockNetwork = Network.builder()
+        NetworkDO mockNetwork = NetworkDO.builder()
                 .networkId(networkId)
                 .name("Test Network")
                 .type("LAN")
@@ -152,7 +152,7 @@ public class NetworkControllerTest {
                 .build();
 
         // Costruisci una risposta di successo (ApiResponse)
-        ApiResponse<Network> mockApiResponse = ApiResponse.success(mockNetwork);
+        ApiResponse<NetworkDO> mockApiResponse = ApiResponse.success(mockNetwork);
 
         // Configurazione dello stub del servizio
         when(networkService.getNetworkById(networkId)).thenReturn(mockApiResponse);

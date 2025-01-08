@@ -16,13 +16,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.project.network.serenaigrid.networkManagement.dtos.ApiResponse;
-import com.project.network.serenaigrid.networkManagement.models.MonitoringData;
-import com.project.network.serenaigrid.networkManagement.models.Network;
-import com.project.network.serenaigrid.networkManagement.models.NetworkDetails;
+import com.project.network.serenaigrid.networkManagement.models.MonitoringDataDO;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDO;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDetailsDO;
 import com.project.network.serenaigrid.networkManagement.repositories.NetworkRepository;
 import com.project.network.serenaigrid.networkManagement.services.MonitoringService;
 import com.project.network.serenaigrid.networkManagement.services.NetworkSimulatorService;
+import com.project.network.serenaigrid.utils.ApiResponse;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -55,7 +55,7 @@ public class MonitoringServiceTest {
         String networkId = "testNetworkId";
 
         // Costruisco l'oggetto Network
-        Network mockNetwork = Network.builder()
+        NetworkDO mockNetwork = NetworkDO.builder()
                 .networkId(networkId)
                 .name("Test Network")
                 .type("LAN")
@@ -64,7 +64,7 @@ public class MonitoringServiceTest {
                 .build();
 
         // Costruisco una lista di NetworkDetails
-        NetworkDetails mockNetworkDetails = NetworkDetails.builder()
+        NetworkDetailsDO mockNetworkDetails = NetworkDetailsDO.builder()
                 .id("testDetailsId")
                 .ipAddress("192.168.0.1")
                 .bandwidthUsage(500)
@@ -72,14 +72,14 @@ public class MonitoringServiceTest {
                 .network(mockNetwork) // Associa il Network
                 .build();
 
-        List<NetworkDetails> mockNetworkDetailsList = Arrays.asList(mockNetworkDetails);
+        List<NetworkDetailsDO> mockNetworkDetailsList = Arrays.asList(mockNetworkDetails);
 
         // Stub dei servizi
         when(networkRepository.findById(networkId)).thenReturn(Optional.of(mockNetwork));
         when(simulatorService.simulateNetwork(networkId)).thenReturn(mockNetworkDetailsList);
 
         // Chiamata al servizio
-        ApiResponse<MonitoringData> result = monitoringService.collectMonitoringData(networkId);
+        ApiResponse<MonitoringDataDO> result = monitoringService.collectMonitoringData(networkId);
 
         // Verifica che la risposta sia un successo
         Assertions.assertTrue(result.isSuccess());
@@ -97,7 +97,7 @@ public class MonitoringServiceTest {
         String networkId = "testNetworkId";
 
         // Costruisco l'oggetto Network
-        Network mockNetwork = Network.builder()
+        NetworkDO mockNetwork = NetworkDO.builder()
                 .networkId(networkId)
                 .name("Test Network")
                 .type("LAN")
@@ -112,7 +112,7 @@ public class MonitoringServiceTest {
         when(simulatorService.simulateNetwork(networkId)).thenReturn(Collections.emptyList());
 
         // Chiamata al servizio
-        ApiResponse<MonitoringData> result = monitoringService.collectMonitoringData(networkId);
+        ApiResponse<MonitoringDataDO> result = monitoringService.collectMonitoringData(networkId);
 
         // Verifica che la risposta non sia un successo
         Assertions.assertFalse(result.isSuccess());
@@ -129,7 +129,7 @@ public class MonitoringServiceTest {
         when(networkRepository.findById(networkId)).thenReturn(Optional.empty());
 
         // Chiamata al servizio
-        ApiResponse<MonitoringData> result = monitoringService.collectMonitoringData(networkId);
+        ApiResponse<MonitoringDataDO> result = monitoringService.collectMonitoringData(networkId);
 
         // Verifica che la risposta non sia un successo
         Assertions.assertFalse(result.isSuccess());

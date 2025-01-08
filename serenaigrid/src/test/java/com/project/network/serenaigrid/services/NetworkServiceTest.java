@@ -14,10 +14,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.project.network.serenaigrid.networkManagement.dtos.ApiResponse;
-import com.project.network.serenaigrid.networkManagement.models.Network;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDO;
 import com.project.network.serenaigrid.networkManagement.repositories.NetworkRepository;
 import com.project.network.serenaigrid.networkManagement.services.NetworkService;
+import com.project.network.serenaigrid.utils.ApiResponse;
 
 @SpringBootTest
 public class NetworkServiceTest {
@@ -31,13 +31,13 @@ public class NetworkServiceTest {
     @Test
     public void testRegisterNetwork_Success() {
         // Crea una rete da registrare
-        Network network = Network.builder().name("Test Network").type("LAN").nodeCount(5).build();
+        NetworkDO network = NetworkDO.builder().name("Test Network").type("LAN").nodeCount(5).build();
 
         // Stub del repository per simulare il comportamento del salvataggio
-        when(networkRepository.save(any(Network.class))).thenReturn(network);
+        when(networkRepository.save(any(NetworkDO.class))).thenReturn(network);
 
         // Chiamata al servizio
-        ApiResponse<Network> result = networkService.registerNetwork(network);
+        ApiResponse<NetworkDO> result = networkService.registerNetwork(network);
 
         // Verifica che la risposta sia di successo
         Assertions.assertTrue(result.isSuccess());
@@ -47,7 +47,7 @@ public class NetworkServiceTest {
     @Test
     public void testRegisterNetwork_Failure() {
         // Simula un errore nel servizio passando un oggetto nullo
-        ApiResponse<Network> result = networkService.registerNetwork(null);
+        ApiResponse<NetworkDO> result = networkService.registerNetwork(null);
 
         // Verifica che la risposta non sia di successo
         Assertions.assertFalse(result.isSuccess());
@@ -59,16 +59,16 @@ public class NetworkServiceTest {
 
     @Test
     public void testGetAllNetworks_Success() {
-        List<Network> networks = List.of(
-                Network.builder().name("Network 1").type("LAN").build(),
-                Network.builder().name("Network 2").type("WAN").build()
+        List<NetworkDO> networks = List.of(
+                NetworkDO.builder().name("Network 1").type("LAN").build(),
+                NetworkDO.builder().name("Network 2").type("WAN").build()
         );
 
         // Stub del repository per restituire una lista di reti
         when(networkRepository.findAll()).thenReturn(networks);
 
         // Eseguiamo la chiamata al servizio
-        ApiResponse<List<Network>> result = networkService.getAllNetworks();
+        ApiResponse<List<NetworkDO>> result = networkService.getAllNetworks();
 
         // Verifica che la risposta sia di successo
         Assertions.assertTrue(result.isSuccess());
@@ -81,7 +81,7 @@ public class NetworkServiceTest {
         when(networkRepository.findAll()).thenReturn(Collections.emptyList());
 
         // Eseguiamo la chiamata al servizio
-        ApiResponse<List<Network>> result = networkService.getAllNetworks();
+        ApiResponse<List<NetworkDO>> result = networkService.getAllNetworks();
 
         // Verifica che la risposta non sia di successo
         Assertions.assertFalse(result.isSuccess());
@@ -94,11 +94,11 @@ public class NetworkServiceTest {
     @Test
     public void testGetNetworkById_Success() {
         // Prepara una rete e salvala nel repository
-        Network network = Network.builder().name("Test Network").type("LAN").nodeCount(5).build();
+        NetworkDO network = NetworkDO.builder().name("Test Network").type("LAN").nodeCount(5).build();
         when(networkRepository.findById(network.getNetworkId())).thenReturn(Optional.of(network));
 
         // Chiamata al servizio per ottenere la rete tramite il suo ID
-        ApiResponse<Network> result = networkService.getNetworkById(network.getNetworkId());
+        ApiResponse<NetworkDO> result = networkService.getNetworkById(network.getNetworkId());
 
         // Verifica che la risposta sia di successo
         Assertions.assertTrue(result.isSuccess());
@@ -111,7 +111,7 @@ public class NetworkServiceTest {
         when(networkRepository.findById(anyString())).thenReturn(Optional.empty());
 
         // Chiamata al servizio per ottenere una rete con un ID inesistente
-        ApiResponse<Network> result = networkService.getNetworkById("nonExistentId");
+        ApiResponse<NetworkDO> result = networkService.getNetworkById("nonExistentId");
 
         // Verifica che la risposta non sia di successo
         Assertions.assertFalse(result.isSuccess());

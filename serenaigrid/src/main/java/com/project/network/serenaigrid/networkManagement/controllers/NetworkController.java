@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.network.serenaigrid.networkManagement.dtos.ApiResponse;
-import com.project.network.serenaigrid.networkManagement.models.Network;
+import com.project.network.serenaigrid.networkManagement.models.NetworkDO;
 import com.project.network.serenaigrid.networkManagement.services.NetworkService;
+import com.project.network.serenaigrid.utils.ApiResponse;
 
 @RestController
 @RequestMapping("/network")
@@ -25,24 +25,24 @@ public class NetworkController {
     
     // Metodo per registrare una rete
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse<Network>> registerNetwork(@RequestBody Network network) {
-        ApiResponse<Network> response = networkService.registerNetwork(network);
+    public ResponseEntity<ApiResponse<NetworkDO>> registerNetwork(@RequestBody NetworkDO network) {
+        ApiResponse<NetworkDO> response = networkService.registerNetwork(network);
         return ResponseEntity.status(response.isSuccess() ? HttpStatus.CREATED : HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(response);
     }
     
     // Metodo per ottenere la lista di tutte le reti
     @GetMapping("/list")
-    public ResponseEntity<ApiResponse<List<Network>>> listNetworks() {
-        ApiResponse<List<Network>> response = networkService.getAllNetworks();
+    public ResponseEntity<ApiResponse<List<NetworkDO>>> listNetworks() {
+        ApiResponse<List<NetworkDO>> response = networkService.getAllNetworks();
         return ResponseEntity.status(response.isSuccess() ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(response);
     }
     
     // Metodo per ottenere una rete per ID
     @GetMapping("/network/{networkId}")
-    public ResponseEntity<ApiResponse<Network>> getNetworkById(@PathVariable("networkId") String networkId) {
-        ApiResponse<Network> response = networkService.getNetworkById(networkId);
+    public ResponseEntity<ApiResponse<NetworkDO>> getNetworkById(@PathVariable("networkId") String networkId) {
+        ApiResponse<NetworkDO> response = networkService.getNetworkById(networkId);
         return ResponseEntity.status(response.isSuccess() ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(response);
     }
