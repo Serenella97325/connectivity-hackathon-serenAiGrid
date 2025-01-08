@@ -9,7 +9,6 @@ import org.hl7.fhir.r4.model.Observation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.network.serenaigrid.medicalDataManagement.models.DeviceDO;
 import com.project.network.serenaigrid.medicalDataManagement.models.FHIRBundleDO;
 import com.project.network.serenaigrid.medicalDataManagement.models.ObservationDO;
@@ -38,9 +37,6 @@ public class FHIRBundleSaveService {
     
     @Autowired
     private FhirContext fhirContext;
-    
-    @Autowired
-    private ObjectMapper objectMapper; 
 
     /**
      * Genera un FHIR Bundle, salva le risorse e gli ID nel database
@@ -59,9 +55,6 @@ public class FHIRBundleSaveService {
             String bundleJson = fhirContext.newJsonParser()
             		.setPrettyPrint(true) // Abilita la formattazione con indentazione
             		.encodeResourceToString(bundle);
-            
-            // Prettifica il JSON prima di restituirlo (facoltativo)
-            String prettyJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(bundleJson);
 
             // Estrai gli ID delle risorse
             List<String> observationIds = bundle.getEntry().stream()
@@ -78,7 +71,7 @@ public class FHIRBundleSaveService {
             FHIRBundleDO fhirBundle = new FHIRBundleDO();
             fhirBundle.setObservationIds(observationIds);
             fhirBundle.setDeviceIds(deviceIds);
-            fhirBundle.setBundleJson(prettyJson);
+            fhirBundle.setBundleJson(bundleJson);
 
             // Salva gli ID nel repository
             fhirBundleRepository.save(fhirBundle);
