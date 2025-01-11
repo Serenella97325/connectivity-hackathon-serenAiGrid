@@ -24,4 +24,5 @@ public class ObservationDO {
     @Lob
     private String observationJson;
 
+
 }

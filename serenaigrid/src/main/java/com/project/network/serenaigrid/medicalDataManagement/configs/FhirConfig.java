@@ -7,11 +7,10 @@ import ca.uhn.fhir.context.FhirContext;
 
 @Configuration
 public class FhirConfig {
-	
-	// Creazione di un FHIRContext per la versione FHIR R4
+
     @Bean
     public FhirContext fhirContext() {
-        return FhirContext.forR4();
+        return FhirContext.forR4();  // Crea e restituisce il FhirContext per la versione R4 di FHIR
     }
-
+    
 }

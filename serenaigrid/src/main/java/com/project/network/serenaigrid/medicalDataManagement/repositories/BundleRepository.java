@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.project.network.serenaigrid.medicalDataManagement.models.FHIRBundleDO;
 
 @Repository
-public interface FHIRBundleRepository extends JpaRepository<FHIRBundleDO, String> {
+public interface BundleRepository extends JpaRepository<FHIRBundleDO, String> {
 
 }
