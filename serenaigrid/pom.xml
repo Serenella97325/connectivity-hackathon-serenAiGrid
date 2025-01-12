@@ -83,8 +83,7 @@
 			<version>6.6.0</version>
 		</dependency>
 
-		<!--
-		https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/org.hl7.fhir.utilities -->
+		<!--https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/org.hl7.fhir.utilities -->
 		<dependency>
 			<groupId>ca.uhn.hapi.fhir</groupId>
 			<artifactId>org.hl7.fhir.utilities</artifactId>
