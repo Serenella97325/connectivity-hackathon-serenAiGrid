@@ -1,27 +1,24 @@
 package com.project.network.serenaigrid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import com.project.network.serenaigrid.medicalDataManagement.configs.FhirRestfulServer;
-
+@ServletComponentScan
 @SpringBootApplication
-public class SerenaigridApplication {
+public class SerenaigridApplication extends SpringBootServletInitializer {
+	
+	private static final Class<SerenaigridApplication> applicationClass = SerenaigridApplication.class;
 
 	public static void main(String[] args) {
-		SpringApplication.run(SerenaigridApplication.class, args);
+		SpringApplication.run(applicationClass, args);
 	}
 	
-    @Bean
-    public ServletRegistrationBean<FhirRestfulServer> servletRegistrationBean(ApplicationContext context) {
-        FhirRestfulServer restfulServer = new FhirRestfulServer(context);
-        ServletRegistrationBean<FhirRestfulServer> registration = new ServletRegistrationBean<>(restfulServer, "/*");
-        registration.setName("FhirServlet");
-        return registration;
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(applicationClass);
     }
 
 }

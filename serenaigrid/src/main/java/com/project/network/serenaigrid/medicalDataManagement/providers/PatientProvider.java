@@ -1,85 +1,68 @@
 package com.project.network.serenaigrid.medicalDataManagement.providers;
 
-import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
-import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.IdType;
-import org.hl7.fhir.r4.model.OperationOutcome;
 import org.hl7.fhir.r4.model.Patient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.project.network.serenaigrid.medicalDataManagement.dao.PatientDAO;
-
-import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.annotation.Create;
-import ca.uhn.fhir.rest.annotation.Delete;
 import ca.uhn.fhir.rest.annotation.IdParam;
-import ca.uhn.fhir.rest.annotation.OptionalParam;
 import ca.uhn.fhir.rest.annotation.Read;
 import ca.uhn.fhir.rest.annotation.ResourceParam;
-import ca.uhn.fhir.rest.annotation.Search;
 import ca.uhn.fhir.rest.api.MethodOutcome;
-import ca.uhn.fhir.rest.param.DateRangeParam;
-import ca.uhn.fhir.rest.param.StringParam;
-import ca.uhn.fhir.rest.param.TokenParam;
 import ca.uhn.fhir.rest.server.IResourceProvider;
-import jakarta.servlet.http.HttpServletRequest;
+import ca.uhn.fhir.rest.server.exceptions.ResourceNotFoundException;
 
-@Component
-public class PatientProvider implements IResourceProvider {
+    @Component
+    public class PatientProvider implements IResourceProvider {
 
-	@Autowired
-	private FhirContext ctx;
+        private static Long counter = 1L;
 
-	@Autowired
-	private PatientDAO patientDao;
+        private static final ConcurrentHashMap<String, Patient> patients = new ConcurrentHashMap<>();
 
-	@Override
-	public Class<? extends IBaseResource> getResourceType() {
-		return Patient.class;
-	}
+        static {
+            patients.put(String.valueOf(counter), createPatient("Stitt"));
+            patients.put(String.valueOf(counter), createPatient("Hodges"));
+            patients.put(String.valueOf(counter), createPatient("Desmond"));
+        }
 
-	@Search
-	public List<Patient> searchPatient(HttpServletRequest request,
-			@OptionalParam(name = Patient.SP_BIRTHDATE) DateRangeParam birthDate,
-			@OptionalParam(name = Patient.SP_FAMILY) StringParam familyName,
-			@OptionalParam(name = Patient.SP_GENDER) StringParam gender,
-			@OptionalParam(name = Patient.SP_GIVEN) StringParam givenName,
-			@OptionalParam(name = Patient.SP_IDENTIFIER) TokenParam identifier,
-			@OptionalParam(name = Patient.SP_NAME) StringParam name,
-			@OptionalParam(name = Patient.SP_RES_ID) TokenParam resid) {
 
-		return patientDao.search(ctx, birthDate, familyName, gender, givenName, identifier, name);
-	}
+        @Read
+        public Patient find(@IdParam final IdType id) {
+            if (patients.containsKey(id.getIdPart())) {
+                return patients.get(id.getIdPart());
+            } else {
+                throw new ResourceNotFoundException(id);
+            }
+        }
 
-	@Read()
-	public Patient read(@IdParam IdType theId) {
+        @Create
+        public MethodOutcome createPatient(@ResourceParam Patient patient) {
 
-		return patientDao.read(ctx, theId);
+            patient.setId(createId(counter, 1L));
+            patients.put(String.valueOf(counter), patient);
 
-	}
+            return new MethodOutcome(patient.getIdElement());
+        }
 
-	@Create()
-    public MethodOutcome createPatient(HttpServletRequest theRequest, @ResourceParam Patient patient) {
+        @Override
+        public Class<Patient> getResourceType() {
+            return Patient.class;
+        }
 
-        MethodOutcome  method = new  MethodOutcome();
-        method.setCreated(true);
-        OperationOutcome  opOutcome = new  OperationOutcome();
-        method.setOperationOutcome(opOutcome);
-       
-        return patientDao.create(ctx, patient);
-    }
+        private static IdType createId(final Long id, final Long versionId) {
+            return new IdType("Patient", "" + id, "" + versionId);
+        }
 
-	@Search()
-	public List<Patient> getAllPatients() {
-		return patientDao.getAllPatients();
+        private static Patient createPatient(final String name) {
+            final Patient patient = new Patient();
+            patient.getName().add(new HumanName().setFamily(name));
+            patient.setId(createId(counter, 1L));
+            counter++;
+            return patient;
+        }
 
-	}
 
-	@Delete()
-	public void delete(@IdParam IdType theId) {
-
-		patientDao.delete(ctx, theId);
-	}
 }
