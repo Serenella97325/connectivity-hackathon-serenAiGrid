@@ -59,7 +59,6 @@ public class BundleProvider implements IResourceProvider {
         return new MethodOutcome(bundle.getIdElement());
     }
     
-
     @Override
     public Class<Bundle> getResourceType() {
         return Bundle.class;
