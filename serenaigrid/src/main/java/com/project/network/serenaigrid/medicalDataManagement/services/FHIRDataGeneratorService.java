@@ -13,6 +13,7 @@ import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.Extension;
+import org.hl7.fhir.r4.model.Meta;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Quantity;
 import org.hl7.fhir.r4.model.Reference;
@@ -24,6 +25,8 @@ public class FHIRDataGeneratorService {
 
     private static final Random random = new Random();
 
+    Date now = new Date(System.currentTimeMillis());  // Get current time with milliseconds
+    
     // Mappa per tipi di emergenze e codici associati
     private static final Map<String, String> EMERGENCY_MAP = new HashMap<>();
     static {
@@ -35,22 +38,21 @@ public class FHIRDataGeneratorService {
     }
 
     /**
-     * Genera emergenze mediche con dati FHIR e estensioni per rete
+     * Generate medical emergencies with FHIR data and network extensions
      */
     public List<Observation> generateEmergencies() {
         List<Observation> emergencies = new ArrayList<>();
-        int numEmergencies = random.nextInt(5) + 1; // Fino a 5 emergenze
+        int numEmergencies = random.nextInt(5) + 1; // Up to 5 emergencies
 
         for (int i = 0; i < numEmergencies; i++) {
             Observation emergency = new Observation();
             emergency.setId(UUID.randomUUID().toString());
             emergency.setStatus(Observation.ObservationStatus.FINAL);
 
-            // Tipo di emergenza casuale
+            // Type of random emergency
             String emergencyType = getRandomEmergencyType();
             String emergencyCode = EMERGENCY_MAP.get(emergencyType);
 
-            // Imposta correttamente il CodeableConcept
             CodeableConcept codeableConcept = new CodeableConcept();
             codeableConcept.addCoding()
                 .setSystem("http://loinc.org")
@@ -59,10 +61,10 @@ public class FHIRDataGeneratorService {
             emergency.setCode(codeableConcept);
 
             emergency.setSubject(new Reference("Patient/" + (i + 1)));
-            emergency.setEffective(new DateTimeType(new Date()));
+            emergency.setEffective(new DateTimeType(now));
             emergency.addNote().setText("Emergency #" + (i + 1) + ": " + emergencyType);
 
-            // Estensioni per la rete
+            // Extensions for the network
             emergency.addExtension(createNetworkExtension("http://example.org/fhir/network-priority", "High"));
             emergency.addExtension(createNetworkExtension("http://example.org/fhir/network-latency", random.nextDouble() * 200, "ms"));
             
@@ -73,7 +75,7 @@ public class FHIRDataGeneratorService {
     }
 
     /**
-     * Genera sessioni di telemedicina con QoS FHIR e estensioni di rete
+     * Generate telemedicine sessions with FHIR QoS and network extensions
      */
     public Observation generateTelemedicineSession() {
         Observation telemedicine = new Observation();
@@ -104,16 +106,16 @@ public class FHIRDataGeneratorService {
             .setCode(bandwidthCode)  
             .setValue(new Quantity(random.nextDouble() * 100).setUnit("Mbps"));
         
-        telemedicine.setEffective(new DateTimeType(new Date()));
+        telemedicine.setEffective(new DateTimeType(now));
 
-        // Estensioni di rete
+        // Extensions for the network
         telemedicine.addExtension(createNetworkExtension("http://example.org/fhir/telemedicine-priority", "Normal"));
 
         return telemedicine;
     }
 
     /**
-     * Genera dati sui dispositivi medici
+     * Generate data on medical devices
      */
     public List<Device> generateDevices() {
         String[] deviceTypes = {"Ventilator", "ECG Monitor", "Defibrillator"};
@@ -141,21 +143,26 @@ public class FHIRDataGeneratorService {
     }
 
     /**
-     * Genera un bundle che include emergenze, telemedicina e dispositivi
+     * Generate a bundle that includes emergencies, telemedicine and devices
      */
     public Bundle generateFHIRBundle() {
         Bundle bundle = new Bundle();
         bundle.setType(Bundle.BundleType.COLLECTION);
+        
+        // Set a valid value for lastUpdated
+        Meta meta = new Meta();
+        meta.setLastUpdated(new Date()); // Set current date and time
+        bundle.setMeta(meta);
 
-        // Aggiungi emergenze
+        // Add emergencies
         generateEmergencies().forEach(emergency ->
             bundle.addEntry(new Bundle.BundleEntryComponent().setResource(emergency))
         );
 
-        // Aggiungi sessione di telemedicina
+        // Add telemedicine session
         bundle.addEntry(new Bundle.BundleEntryComponent().setResource(generateTelemedicineSession()));
 
-        // Aggiungi dispositivi
+        // Add devices
         generateDevices().forEach(device ->
             bundle.addEntry(new Bundle.BundleEntryComponent().setResource(device))
         );
@@ -164,14 +171,14 @@ public class FHIRDataGeneratorService {
     }
 
     /**
-     * Crea un'estensione FHIR con valore String
+     * Create a FHIR extension with value String
      */
     private Extension createNetworkExtension(String url, String value) {
         return new Extension(url, new StringType(value));
     }
 
     /**
-     * Crea un'estensione FHIR con valore Quantity
+     * Create a FHIR extension with value Quantity
      */
     private Extension createNetworkExtension(String url, double value, String unit) {
         Quantity quantity = new Quantity();
@@ -180,7 +187,7 @@ public class FHIRDataGeneratorService {
     }
 
     /**
-     * Restituisce un tipo di emergenza casuale
+     * Returns a random emergency type
      */
     private String getRandomEmergencyType() {
         List<String> keys = new ArrayList<>(EMERGENCY_MAP.keySet());
