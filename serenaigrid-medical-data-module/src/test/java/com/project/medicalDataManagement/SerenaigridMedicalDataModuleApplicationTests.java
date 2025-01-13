@@ -1,4 +1,4 @@
-package com.project.network.serenaigrid;
+package com.project.medicalDataManagement;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
