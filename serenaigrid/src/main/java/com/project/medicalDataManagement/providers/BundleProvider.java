@@ -1,4 +1,4 @@
-package com.project.network.serenaigrid.medicalDataManagement.providers;
+package com.project.medicalDataManagement.providers;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -10,7 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.project.network.serenaigrid.medicalDataManagement.services.FHIRDataGeneratorService;
+import com.project.medicalDataManagement.services.FHIRDataGeneratorService;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;

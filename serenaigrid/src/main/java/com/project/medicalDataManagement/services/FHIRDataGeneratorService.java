@@ -1,4 +1,4 @@
-package com.project.network.serenaigrid.medicalDataManagement.services;
+package com.project.medicalDataManagement.services;
 
 import java.util.ArrayList;
 import java.util.Date;

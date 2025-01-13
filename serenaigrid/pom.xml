@@ -9,12 +9,12 @@
 		<version>3.4.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.project.network</groupId>
-	<artifactId>serenaigrid</artifactId>
+	<groupId>com.project.medicalDataManagement</groupId>
+	<artifactId>serenaigrid-medical-data-module</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>serenaigrid</name>
+	<name>serenaigrid-medical-data-module</name>
 	<description>Harmonizing healthcare connectivity through AI-driven
-		intelligence and innovation</description>
+		intelligence and innovation (Medical Data Management Module) </description>
 	<url />
 	<licenses>
 		<license />

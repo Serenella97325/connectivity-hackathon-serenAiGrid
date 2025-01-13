@@ -1,4 +1,4 @@
-package com.project.network.serenaigrid.medicalDataManagement.providers;
+package com.project.medicalDataManagement.providers;
 
 import java.util.concurrent.ConcurrentHashMap;
 

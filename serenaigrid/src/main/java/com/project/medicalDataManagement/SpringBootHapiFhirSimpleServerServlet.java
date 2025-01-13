@@ -1,4 +1,4 @@
-package com.project.network.serenaigrid;
+package com.project.medicalDataManagement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
-import com.project.network.serenaigrid.medicalDataManagement.providers.BundleProvider;
-import com.project.network.serenaigrid.medicalDataManagement.providers.DeviceProvider;
-import com.project.network.serenaigrid.medicalDataManagement.providers.PatientProvider;
-import com.project.network.serenaigrid.medicalDataManagement.services.FHIRDataGeneratorService;
+import com.project.medicalDataManagement.providers.BundleProvider;
+import com.project.medicalDataManagement.providers.DeviceProvider;
+import com.project.medicalDataManagement.providers.PatientProvider;
+import com.project.medicalDataManagement.services.FHIRDataGeneratorService;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.api.EncodingEnum;

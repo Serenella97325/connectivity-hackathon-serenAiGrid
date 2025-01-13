@@ -1,4 +1,4 @@
-package com.project.network.serenaigrid;
+package com.project.medicalDataManagement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

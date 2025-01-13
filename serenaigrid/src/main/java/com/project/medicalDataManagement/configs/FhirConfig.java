@@ -1,4 +1,4 @@
-package com.project.network.serenaigrid.medicalDataManagement.configs;
+package com.project.medicalDataManagement.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
