@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-# Variabili globali per memorizzare i dati ricevuti
+# Global variables to store received data
 medical_data = None
 network_data = None
 
@@ -13,41 +13,43 @@ def process_bundle():
 
     global medical_data
 
-    # Ottieni il bundle JSON inviato dal server Spring Boot
+    # Get the JSON bundle containing medical data sent from the Spring Boot server
     medical_data = request.get_json()
 
-    # Verifica se i dati sono stati ricevuti correttamente
+    # Check if data was received correctly
     if not medical_data:
         return jsonify({"status": "error", "message": "Nessun bundle ricevuto"}), 400
 
-    # Stampa il JSON formattato in modo leggibile
-    print("Bundle ricevuto:")
-    # Formattazione leggibile del JSON
+    # Print the JSON formatted legibly
+    print("Bundle received:")
+    # Readable JSON format
     print(json.dumps(medical_data, indent=4, ensure_ascii=False))
 
-    # Elabora il bundle come desiderato (ad esempio, eseguire calcoli o altre operazioni)
-    # Qui puoi fare qualsiasi cosa con il bundle che hai ricevuto
-    # Restituisci il bundle direttamente
+    # Processing the bundle as desired (for example, performing calculations or other operations) --> TO DO with AI
+
+    # Return the bundle directly to Spring Boot
     return jsonify(medical_data), 200
 
 
 @app.route('/process-monitoring-data', methods=['POST'])
 def process_monitoring_data():
+
     global network_data
 
-    # Ottieni i dati JSON inviati da Spring Boot
+    # Get network JSON data sent from Spring Boot
     network_data = request.get_json()
 
     if not network_data:
         return jsonify({"status": "error", "message": "Nessun dato di monitoraggio ricevuto"}), 400
 
-    # Log dei dati ricevuti
+    # Log of data received
     print("Dati di monitoraggio rete ricevuti:")
     print(json.dumps(network_data, indent=4, ensure_ascii=False))
 
-    # Esegui il processamento necessario
-    # Ad esempio: modifica, calcoli, ecc.
-    processed_data = network_data  # Per ora, restituisci i dati come sono
+    # Processing the network data as desired (for example, performing calculations or other operations) --> TO DO with AI
+
+    # Return the network data directly to Spring Boot
+    processed_data = network_data
 
     return jsonify(processed_data), 200
 
