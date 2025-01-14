@@ -1,6 +1,5 @@
 package com.project.networkDataManagement.models;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -18,5 +17,6 @@ public class MonitoringDataDO {
     
     private List<NetworkDetailsDO> networkMetrics;
     
-    private LocalDateTime timestamp;
+    // String for ISO 8601 formatting
+    private String effectiveDateTime;
 }

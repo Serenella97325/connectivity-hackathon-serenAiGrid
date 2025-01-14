@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -65,12 +67,15 @@ public class MonitoringControllerTest {
                 .build();
 
         List<NetworkDetailsDO> mockNetworkDetailsList = Arrays.asList(mockNetworkDetails);
+        
+        // Format current time as ISO 8601 string
+        String effectiveDateTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 
         // Build the MonitoringData object
         MonitoringDataDO mockMonitoringData = MonitoringDataDO.builder()
                 .networkDetails(mockNetwork)
                 .networkMetrics(mockNetworkDetailsList)
-                .timestamp(LocalDateTime.now())
+                .effectiveDateTime(effectiveDateTime)
                 .build();
 
         // Building the ApiResponse of success

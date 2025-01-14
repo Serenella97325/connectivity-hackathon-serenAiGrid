@@ -1,6 +1,8 @@
 package com.project.networkDataManagement.services;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +41,12 @@ public class MonitoringService {
 			// Get the details of network
 			NetworkDO network = networkRepository.findById(networkId)
 					.orElseThrow(() -> new NetworkNotFoundException("Network not found"));
+			
+            // Format current time as ISO 8601 string
+            String effectiveDateTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 
 			// Combine and return data
-			MonitoringDataDO monitoringData = new MonitoringDataDO(network, simulatedData, LocalDateTime.now());
+			MonitoringDataDO monitoringData = new MonitoringDataDO(network, simulatedData, effectiveDateTime);
 			return ApiResponse.success(monitoringData);
 
 		} catch (NetworkNotFoundException ex) {
