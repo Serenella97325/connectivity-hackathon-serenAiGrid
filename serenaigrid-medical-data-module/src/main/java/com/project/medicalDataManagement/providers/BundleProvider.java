@@ -66,7 +66,7 @@ public class BundleProvider implements IResourceProvider {
             // Use the FHIR parser to deserialize the JSON response in a Bundle object
             Bundle bundleReturned = fhirContext.newJsonParser().parseResource(Bundle.class, responseFromPython);
 
-            System.out.println("Risultato da Python: " + bundleReturned);
+            System.out.println("Medical Data result from Python: " + bundleReturned);
 
             return bundleReturned;
         } else {
