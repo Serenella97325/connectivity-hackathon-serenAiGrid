@@ -34,7 +34,7 @@ The **serenAiGrid** project aims to optimize healthcare resource management by l
 
 ### 1. Data Collection (Network Data Simulation)
 
-The module `serenaigrid-network-data-module` handles the simulation of network data by registering and monitoring networks (LAN or WAN).
+This module handles the simulation of network data by registering and monitoring networks (LAN or WAN).
 
 #### Features
 - **Network Registration:**
@@ -44,19 +44,23 @@ The module `serenaigrid-network-data-module` handles the simulation of network d
 
 - **Network Simulation:**
   - Simulates data such as IP addresses, bandwidth usage, and latency for registered networks.
-  - Data is sent to a Python server (`serenaigrid-ai-data-processing-module`) for further AI-based processing.
+  - Data is sent to a Python server for further AI-based processing.
   - Service: `NetworkSimulatorService`.
 
 #### APIs
 - **Register a Network:**
-  `POST /network/register`
+  `POST http://localhost:8081/spring-boot-network/network/register`
   Data: Network name, type (LAN/WAN), number of nodes, description.
 
 - **List Registered Networks:**
-  `GET /network/list`
+  `GET http://localhost:8081/spring-boot-network/network/list`
 
-- **Start Simulation for a Registered Network:**
-  `POST /monitoring/network/{networkId}`
+- **Retrieve Data for a Specific Network:**
+  `GET http://localhost:8081/spring-boot-network/network/{networkId}`
+
+- **Monitor Network Data:**
+  `GET http://localhost:8081/spring-boot-network/monitoring/network/{networkId}`
+  Description: Simulates network data (e.g., bandwidth usage, IP addresses, latency) for the specified network identified by `networkId`.
 
 #### Simulation Details
 - **IP Address:**
@@ -75,7 +79,7 @@ The module `serenaigrid-network-data-module` handles the simulation of network d
 
 ### 2. Data Collection (Medical Data Simulation)
 
-The module `serenaigrid-medical-data-module` simulates medical data using the FHIR (Fast Healthcare Interoperability Resources) standard to support medical emergencies, telemedicine sessions, and device management.
+This module simulates medical data using the FHIR (Fast Healthcare Interoperability Resources) standard to support medical emergencies, telemedicine sessions, and device management.
 
 #### Features
 - **FHIR Data Generation:**
@@ -85,13 +89,26 @@ The module `serenaigrid-medical-data-module` simulates medical data using the FH
 
 - **Service:** `FHIRDataGeneratorService`.
 
+#### APIs
+- **Retrieve Server Metadata:**
+  `GET http://localhost:8080/spring-boot-hapi-fhir/metadata`
+  Description: Returns the metadata of the FHIR server.
+
+- **Create a Bundle:**
+  `POST http://localhost:8080/spring-boot-hapi-fhir/Bundle`
+  Description: Creates a FHIR Bundle containing simulated medical data (e.g., emergencies, telemedicine sessions, devices).
+
+- **Retrieve a Bundle:**
+  `GET http://localhost:8080/spring-boot-hapi-fhir/Bundle/{id}`
+  Description: Retrieves the details of a specific FHIR Bundle by its unique identifier (`id`).
+
 #### Flow of Use
 1. **Bundle Creation:**
-   - A client request triggers the generation of a FHIR Bundle containing simulated emergencies, telemedicine sessions, and device data.
+   - A client sends a request to the `/Bundle` endpoint to create a new FHIR Bundle with simulated data (emergencies, telemedicine, devices).
    - Service: `BundleProvider`.
 
 2. **Python Processing:**
-   - The Bundle is sent to a Python server (`serenaigrid-ai-data-processing-module`) for AI-based processing before being returned to the client.
+   - The Bundle is sent to a Python server for AI-based processing before being returned to the client.
 
 ---
 
