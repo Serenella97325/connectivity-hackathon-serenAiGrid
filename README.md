@@ -34,7 +34,7 @@ The **serenAiGrid** project aims to optimize healthcare resource management by l
 
 ### 1. Data Collection (Network Data Simulation)
 
-This module handles the simulation of network data by registering and monitoring networks (LAN or WAN).
+The module `serenaigrid-network-data-module` handles the simulation of network data by registering and monitoring networks (LAN or WAN).
 
 #### Features
 - **Network Registration:**
@@ -44,7 +44,7 @@ This module handles the simulation of network data by registering and monitoring
 
 - **Network Simulation:**
   - Simulates data such as IP addresses, bandwidth usage, and latency for registered networks.
-  - Data is sent to a Python server for further AI-based processing.
+  - Data is sent to a Python server (`serenaigrid-ai-data-processing-module`) for further AI-based processing.
   - Service: `NetworkSimulatorService`.
 
 #### APIs
@@ -79,7 +79,7 @@ This module handles the simulation of network data by registering and monitoring
 
 ### 2. Data Collection (Medical Data Simulation)
 
-This module simulates medical data using the FHIR (Fast Healthcare Interoperability Resources) standard to support medical emergencies, telemedicine sessions, and device management.
+The module `serenaigrid-medical-data-module` simulates medical data using the FHIR (Fast Healthcare Interoperability Resources) standard to support medical emergencies, telemedicine sessions, and device management.
 
 #### Features
 - **FHIR Data Generation:**
@@ -108,7 +108,7 @@ This module simulates medical data using the FHIR (Fast Healthcare Interoperabil
    - Service: `BundleProvider`.
 
 2. **Python Processing:**
-   - The Bundle is sent to a Python server for AI-based processing before being returned to the client.
+   - The Bundle is sent to a Python server (`serenaigrid-ai-data-processing-module`) for AI-based processing before being returned to the client.
 
 ---
 
