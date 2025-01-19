@@ -7,7 +7,11 @@ app = Flask(__name__)
 medical_data = None
 network_data = None
 
+# Path to save data
+DATA_PATH = 'data_received.json'
 
+
+# Function to get the JSON bundle containing medical data sent from the Spring Boot server
 @app.route('/process-bundle', methods=['POST'])
 def process_bundle():
 
@@ -27,10 +31,14 @@ def process_bundle():
 
     # Processing the bundle as desired (for example, performing calculations or other operations) --> TO DO with AI
 
+    # After receiving the medical data, check if both sets of data are available and save combined data
+    save_combined_data()
+
     # Return the bundle directly to Spring Boot
     return jsonify(medical_data), 200
 
 
+# Function to get network JSON data containing the network details
 @app.route('/process-monitoring-data', methods=['POST'])
 def process_monitoring_data():
 
@@ -48,10 +56,30 @@ def process_monitoring_data():
 
     # Processing the network data as desired (for example, performing calculations or other operations) --> TO DO with AI
 
+    # After receiving the network data, check if both sets of data are available and save combined data
+    save_combined_data()
+
     # Return the network data directly to Spring Boot
     processed_data = network_data
 
     return jsonify(processed_data), 200
+
+
+# Function to save the combined data (medical and network)
+def save_combined_data():
+    if medical_data and network_data:
+        # Combining medical and network data
+        combined_data = {
+            "medical_data": medical_data,
+            "network_data": network_data
+        }
+
+        # Save data in JSON file
+        with open(DATA_PATH, 'w') as f:
+            json.dump(combined_data, f, indent=4, ensure_ascii=False)
+
+        print("Combined data saved in file:")
+        print(json.dumps(combined_data, indent=4, ensure_ascii=False))
 
 
 if __name__ == '__main__':

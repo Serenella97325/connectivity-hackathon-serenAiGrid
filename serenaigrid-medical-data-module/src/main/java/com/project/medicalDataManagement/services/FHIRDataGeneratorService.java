@@ -63,10 +63,25 @@ public class FHIRDataGeneratorService {
             emergency.setSubject(new Reference("Patient/" + (i + 1)));
             emergency.setEffective(new DateTimeType(now));
             emergency.addNote().setText("Emergency #" + (i + 1) + ": " + emergencyType);
+            
+            // Generate random values for latency and bandwidth
+            double latency = random.nextDouble() * 200; // Latenza in ms
+            double bandwidth = random.nextDouble() * 100; // Banda in Mbps
 
             // Extensions for the network
-            emergency.addExtension(createNetworkExtension("http://example.org/fhir/network-priority", "High"));
-            emergency.addExtension(createNetworkExtension("http://example.org/fhir/network-latency", random.nextDouble() * 200, "ms"));
+            emergency.addExtension(createNetworkExtension("http://emergency.org/fhir/network-priority", "High"));
+            emergency.addExtension(createNetworkExtension("http://emergency.org/fhir/network-latency", latency, "ms"));
+            emergency.addExtension(createNetworkExtension("http://emergency.org/fhir/network-bandwidth", bandwidth, "Mbps"));
+            
+            // Quality of Service (QoS) 
+            CodeableConcept qosCode = new CodeableConcept();
+            qosCode.addCoding()
+                .setSystem("http://emergency.org/fhir/network-qos")
+                .setCode("emergency-qos")
+                .setDisplay("Emergency QoS Metrics");
+            emergency.addComponent()
+                .setCode(qosCode)
+                .setValue(new Quantity(bandwidth / latency).setUnit("QoS Unit")); // QoS = Banda / Latenza
             
             emergencies.add(emergency);
         }
@@ -77,41 +92,40 @@ public class FHIRDataGeneratorService {
     /**
      * Generate telemedicine sessions with FHIR QoS and network extensions
      */
-    public Observation generateTelemedicineSession() {
-        Observation telemedicine = new Observation();
-        telemedicine.setId(UUID.randomUUID().toString());
-        telemedicine.setStatus(Observation.ObservationStatus.FINAL);
-        
-        // Imposta correttamente il CodeableConcept
-        CodeableConcept qosCode = new CodeableConcept();
-        qosCode.addCoding()
-            .setSystem("http://example.org/fhir/qos")
-            .setCode("telemed-qos")
-            .setDisplay("Telemedicine QoS Metrics");     
-        telemedicine.setCode(qosCode); 
-
-        // For "Latency", wrap Coding into CodeableConcept
-        CodeableConcept latencyCode = new CodeableConcept();
-        latencyCode.addCoding()
-            .setDisplay("Latency");
-        telemedicine.addComponent()
-            .setCode(latencyCode)  
-            .setValue(new Quantity(random.nextDouble() * 200).setUnit("ms"));
-
-        // For "Bandwidth Usage", wrap Coding into CodeableConcept
-        CodeableConcept bandwidthCode = new CodeableConcept();
-        bandwidthCode.addCoding()
-            .setDisplay("Bandwidth Usage");
-        telemedicine.addComponent()
-            .setCode(bandwidthCode)  
-            .setValue(new Quantity(random.nextDouble() * 100).setUnit("Mbps"));
-        
-        telemedicine.setEffective(new DateTimeType(now));
-
-        // Extensions for the network
-        telemedicine.addExtension(createNetworkExtension("http://example.org/fhir/telemedicine-priority", "Normal"));
-
-        return telemedicine;
+    public List<Observation> generateTelemedicineSessions() {
+    	List<Observation> telemedicineSessions = new ArrayList<>();
+    	int numTelemedicineSessions = random.nextInt(5) + 1; // Up to 5 emergencies
+    	
+    	for (int i = 0; i < numTelemedicineSessions; i++) {
+            Observation telemedicine = new Observation();
+            telemedicine.setId(UUID.randomUUID().toString());
+            telemedicine.setStatus(Observation.ObservationStatus.FINAL);
+            
+            telemedicine.setEffective(new DateTimeType(now));
+            
+            // Generate random values for latency and bandwidth
+            double latency = random.nextDouble() * 200; // Latenza in ms
+            double bandwidth = random.nextDouble() * 100; // Banda in Mbps
+            
+            // Extensions for the network
+            telemedicine.addExtension(createNetworkExtension("http://telemedicine.org/fhir/network-priority", "Normal"));
+            telemedicine.addExtension(createNetworkExtension("http://telemedicine.org/fhir/network-latency", latency, "ms"));
+            telemedicine.addExtension(createNetworkExtension("http://telemedicine.org/fhir/network-bandwidth", bandwidth, "Mbps"));
+            
+            // Quality of Service (QoS) 
+            CodeableConcept qosCode = new CodeableConcept();
+            qosCode.addCoding()
+                .setSystem("http://telemedicine.org/fhir/network-qos")
+                .setCode("telemedicine-qos")
+                .setDisplay("Telemedicine QoS Metrics");
+            telemedicine.addComponent()
+                .setCode(qosCode)
+                .setValue(new Quantity(bandwidth / latency).setUnit("QoS Unit")); // QoS = Banda / Latenza
+            
+            telemedicineSessions.add(telemedicine);    		
+    	}
+    	
+        return telemedicineSessions;
     }
 
     /**
@@ -159,8 +173,9 @@ public class FHIRDataGeneratorService {
             bundle.addEntry(new Bundle.BundleEntryComponent().setResource(emergency))
         );
 
-        // Add telemedicine session
-        bundle.addEntry(new Bundle.BundleEntryComponent().setResource(generateTelemedicineSession()));
+        // Add telemedicine session        
+		generateTelemedicineSessions().forEach(telemedicine -> 
+		    bundle.addEntry(new Bundle.BundleEntryComponent().setResource(telemedicine)));
 
         // Add devices
         generateDevices().forEach(device ->
