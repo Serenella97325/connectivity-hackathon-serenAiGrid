@@ -24,6 +24,7 @@ def optimize_bandwidth_allocation(medical_data, network_data):
     # Parse network data and calculate total bandwidth
     nodes = network_data['networkMetrics']
     total_bandwidth = sum(node['bandwidthUsage'] for node in nodes)
+    initial_bandwidth = total_bandwidth
 
     # Parse medical emergencies and telemedicine sessions
     emergencies = []
@@ -32,17 +33,17 @@ def optimize_bandwidth_allocation(medical_data, network_data):
         if resource['resourceType'] == 'Observation':
             qos = next(
                 (component['valueQuantity']['value'] for component in resource.get('component', [])
-                 if component['code']['coding'][0]['code'] == 'emergency-qos'),
+                 if component['code']['coding'][0]['code'] in ['emergency-qos', 'telemedicine-qos']),
                 None
             )
             priority = next(
                 (ext['valueString'] for ext in resource['extension']
-                 if ext['url'] == 'http://emergency.org/fhir/network-priority'),
+                 if ext['url'] in ['http://emergency.org/fhir/network-priority', 'http://telemedicine.org/fhir/network-priority']),
                 None
             )
             bandwidth = next(
                 (ext['valueQuantity']['value'] for ext in resource['extension']
-                 if ext['url'] == 'http://emergency.org/fhir/network-bandwidth'),
+                 if ext['url'] in ['http://emergency.org/fhir/network-bandwidth', 'http://telemedicine.org/fhir/network-bandwidth']),
                 None
             )
             emergency_type = next(
@@ -55,23 +56,24 @@ def optimize_bandwidth_allocation(medical_data, network_data):
 
             if qos is not None and priority:
                 emergencies.append({
-                    'id': resource['id'],
-                    'priority': priority,
-                    'bandwidth': bandwidth,
-                    'qos': qos,
-                    'emergency_type': emergency_type,
+                    'emergency_id': resource['id'],
+                    'emergency_priority': priority,
+                    'emergency_bandwidth': bandwidth,
+                    'emergency_QoS': qos,
+                    'emergency_type': emergency_type or 'Telemedicine session',
                     'patient_reference': patient_reference
                 })
 
     # Sort emergencies by priority ('High' > 'Normal' > 'Low') and QoS in ascending order
     priority_map = {'High': 1, 'Normal': 2, 'Low': 3}
     emergencies_sorted = sorted(emergencies, key=lambda x: (
-        priority_map[x['priority']], x['qos']))
+        priority_map[x['emergency_priority']], x['emergency_QoS']))
 
     # Allocate bandwidth dynamically across nodes
     allocations = []
     unhandled_emergencies = []
     node_bandwidth = {node['id']: node['bandwidthUsage'] for node in nodes}
+    node_bandwidth_initial_allocation = node_bandwidth.copy()
 
     for emergency in emergencies_sorted:
         if total_bandwidth <= 0:
@@ -79,7 +81,7 @@ def optimize_bandwidth_allocation(medical_data, network_data):
             continue
 
         # Determine the required bandwidth for the emergency
-        required_bandwidth = emergency['bandwidth']
+        required_bandwidth = emergency['emergency_bandwidth']
 
         # Allocate bandwidth from nodes with available resources
         allocated = False
@@ -89,10 +91,10 @@ def optimize_bandwidth_allocation(medical_data, network_data):
                 # Create a new allocation dictionary for this emergency
                 current_allocation = {
                     'node_id': node_id,
-                    'emergency_id': emergency['id'],
-                    'emergency_priority': emergency['priority'],
+                    'emergency_id': emergency['emergency_id'],
+                    'emergency_priority': emergency['emergency_priority'],
                     'emergency_type': emergency['emergency_type'],
-                    'emergency_QoS': emergency['qos'],
+                    'emergency_QoS': emergency['emergency_QoS'],
                     'patient_reference': emergency['patient_reference']
                 }
 
@@ -113,8 +115,10 @@ def optimize_bandwidth_allocation(medical_data, network_data):
     summary = {
         "handled_emergencies": allocations,
         "unhandled_emergencies": unhandled_emergencies,
+        "initial_bandwidth": initial_bandwidth,
         "remaining_bandwidth": total_bandwidth,
-        "node_bandwidth_allocation": node_bandwidth
+        "node_bandwidth_initial_allocation": node_bandwidth_initial_allocation,
+        "node_bandwidth_final_allocation": node_bandwidth
     }
 
     return {
@@ -131,4 +135,5 @@ result = optimize_bandwidth_allocation(medical_data_json, network_data_json)
 
 # Output the result
 print("Allocation Result:", result['allocations'])
+print("\n")
 print("Summary:", result['summary'])
