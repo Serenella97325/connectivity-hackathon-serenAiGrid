@@ -115,8 +115,8 @@ The module `serenaigrid-medical-data-module` simulates medical data using the FH
 ## How to Get Started
 
 ### Prerequisites
-- **Java** (>= 11)
-- **Python** (>= 3.8)
+- **Java** (17)
+- **Python** (3.10.11)
 - Required libraries (see individual module documentation).
 
 ### Steps
