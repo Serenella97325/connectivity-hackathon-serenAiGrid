@@ -1,0 +1,106 @@
+{
+    "allocations": [
+        {
+            "node_id": "b83db409-36be-4cc9-8038-85724327a4da",
+            "emergency_id": "5bd2bd84-9aa9-49ab-8b18-51542f502a4c",
+            "emergency_priority": "High",
+            "emergency_type": "Emergency #1: Traumatic injury",
+            "emergency_QoS": 0.0036889713457991333,
+            "emergency_bandwidth": 0.5101325867517881,
+            "patient_reference": "Patient/1"
+        },
+        {
+            "node_id": "b83db409-36be-4cc9-8038-85724327a4da",
+            "emergency_id": "cd22d989-83c1-4c41-976c-4aa2a2f5871f",
+            "emergency_priority": "High",
+            "emergency_type": "Emergency #2: Traumatic injury",
+            "emergency_QoS": 0.0579675273646145,
+            "emergency_bandwidth": 6.81573324970508,
+            "patient_reference": "Patient/2"
+        },
+        {
+            "node_id": "306410e7-d51d-4b31-a76e-94bc269e517a",
+            "emergency_id": "c6dbcf27-d426-4223-a77b-66ee6a2ed29a",
+            "emergency_priority": "Normal",
+            "emergency_type": "Telemedicine session",
+            "emergency_QoS": 0.10989913089191947,
+            "emergency_bandwidth": 6.4273159621177856,
+            "patient_reference": null
+        }
+    ],
+    "summary": {
+        "handled_emergencies": [
+            {
+                "node_id": "b83db409-36be-4cc9-8038-85724327a4da",
+                "emergency_id": "5bd2bd84-9aa9-49ab-8b18-51542f502a4c",
+                "emergency_priority": "High",
+                "emergency_type": "Emergency #1: Traumatic injury",
+                "emergency_QoS": 0.0036889713457991333,
+                "emergency_bandwidth": 0.5101325867517881,
+                "patient_reference": "Patient/1"
+            },
+            {
+                "node_id": "b83db409-36be-4cc9-8038-85724327a4da",
+                "emergency_id": "cd22d989-83c1-4c41-976c-4aa2a2f5871f",
+                "emergency_priority": "High",
+                "emergency_type": "Emergency #2: Traumatic injury",
+                "emergency_QoS": 0.0579675273646145,
+                "emergency_bandwidth": 6.81573324970508,
+                "patient_reference": "Patient/2"
+            },
+            {
+                "node_id": "306410e7-d51d-4b31-a76e-94bc269e517a",
+                "emergency_id": "c6dbcf27-d426-4223-a77b-66ee6a2ed29a",
+                "emergency_priority": "Normal",
+                "emergency_type": "Telemedicine session",
+                "emergency_QoS": 0.10989913089191947,
+                "emergency_bandwidth": 6.4273159621177856,
+                "patient_reference": null
+            }
+        ],
+        "unhandled_emergencies": [
+            {
+                "emergency_id": "8622ce1c-82e6-4c78-8b61-a0f8197449e9",
+                "emergency_priority": "High",
+                "emergency_bandwidth": 62.15905583038469,
+                "emergency_QoS": 1.085686703093805,
+                "emergency_type": "Emergency #3: Severe allergic reaction",
+                "patient_reference": "Patient/3"
+            },
+            {
+                "emergency_id": "97dee169-259e-4a4a-b4ce-5856089fa371",
+                "emergency_priority": "Normal",
+                "emergency_bandwidth": 22.45097710290804,
+                "emergency_QoS": 0.13487950163339668,
+                "emergency_type": "Telemedicine session",
+                "patient_reference": null
+            },
+            {
+                "emergency_id": "f4990f95-e72f-40c0-89cb-3dffb4182dc0",
+                "emergency_priority": "Low",
+                "emergency_bandwidth": 63.930718631597315,
+                "emergency_QoS": 0.40415349790571303,
+                "emergency_type": "Telemedicine session",
+                "patient_reference": null
+            },
+            {
+                "emergency_id": "db75ad3b-859e-4121-a37e-cbaea4f16e76",
+                "emergency_priority": "Low",
+                "emergency_bandwidth": 96.61775270041366,
+                "emergency_QoS": 3.9887656755013308,
+                "emergency_type": "Telemedicine session",
+                "patient_reference": null
+            }
+        ],
+        "initial_bandwidth": 32.20134828549898,
+        "remaining_bandwidth": 18.44816648692433,
+        "node_bandwidth_initial_allocation": {
+            "b83db409-36be-4cc9-8038-85724327a4da": 8.565195081232712,
+            "306410e7-d51d-4b31-a76e-94bc269e517a": 23.636153204266265
+        },
+        "node_bandwidth_final_allocation": {
+            "b83db409-36be-4cc9-8038-85724327a4da": 1.2393292447758446,
+            "306410e7-d51d-4b31-a76e-94bc269e517a": 17.20883724214848
+        }
+    }
+}
