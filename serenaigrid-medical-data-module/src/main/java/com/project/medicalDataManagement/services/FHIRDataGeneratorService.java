@@ -42,7 +42,7 @@ public class FHIRDataGeneratorService {
      */
     public List<Observation> generateEmergencies() {
         List<Observation> emergencies = new ArrayList<>();
-        int numEmergencies = random.nextInt(5) + 1; // Up to 5 emergencies
+        int numEmergencies = random.nextInt(4) + 1; // Up to 5 emergencies
 
         for (int i = 0; i < numEmergencies; i++) {
             Observation emergency = new Observation();
@@ -94,7 +94,7 @@ public class FHIRDataGeneratorService {
      */
     public List<Observation> generateTelemedicineSessions() {
     	List<Observation> telemedicineSessions = new ArrayList<>();
-    	int numTelemedicineSessions = random.nextInt(5) + 1; // Up to 5 emergencies
+    	int numTelemedicineSessions = random.nextInt(5) + 1; // Up to 5  telemedicine sessions
     	
     	for (int i = 0; i < numTelemedicineSessions; i++) {
             Observation telemedicine = new Observation();
@@ -107,8 +107,11 @@ public class FHIRDataGeneratorService {
             double latency = random.nextDouble() * 200; // Latenza in ms
             double bandwidth = random.nextDouble() * 100; // Banda in Mbps
             
+            // Generate random priority ("Normal" or "Low")
+            String networkPriority = random.nextBoolean() ? "Normal" : "Low";
+            
             // Extensions for the network
-            telemedicine.addExtension(createNetworkExtension("http://telemedicine.org/fhir/network-priority", "Normal"));
+            telemedicine.addExtension(createNetworkExtension("http://telemedicine.org/fhir/network-priority", networkPriority));
             telemedicine.addExtension(createNetworkExtension("http://telemedicine.org/fhir/network-latency", latency, "ms"));
             telemedicine.addExtension(createNetworkExtension("http://telemedicine.org/fhir/network-bandwidth", bandwidth, "Mbps"));
             
@@ -149,6 +152,22 @@ public class FHIRDataGeneratorService {
             Device.DevicePropertyComponent property = device.addProperty();
             Quantity quantity = new Quantity(random.nextInt(10)).setUnit("units");
             property.addValueQuantity(quantity);
+
+            // Add network properties (priority, latency, bandwidth) only if the device is ACTIVE
+            if (status == Device.FHIRDeviceStatus.ACTIVE) {
+                // Generate random values for network priority, latency, and bandwidth
+                String networkPriority = "High";  
+                double latency = random.nextDouble() * 200; // Latency in ms
+                double bandwidth = random.nextDouble() * 100; // Bandwidth in Mbps
+                double qos = bandwidth / latency;
+
+                // Extensions for the network
+                device.addExtension(createNetworkExtension("http://device.org/fhir/network-priority", networkPriority));
+                device.addExtension(createNetworkExtension("http://device.org/fhir/network-latency", latency, "ms"));
+                device.addExtension(createNetworkExtension("http://device.org/fhir/network-bandwidth", bandwidth, "Mbps"));
+                device.addExtension(createNetworkExtension("http://device.org/fhir/network-qos", qos, "QoS Unit"));
+
+            }
 
             devices.add(device);
         }
