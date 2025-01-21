@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  medical-data-module:
+    build:
+      context: ./serenaigrid-medical-data-module
+      dockerfile: Dockerfile-medical
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  network-data-module:
+    build:
+      context: ./serenaigrid-network-data-module
+      dockerfile: Dockerfile-network
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
+
+  python-service:
+    build:
+      context: ./serenaigrid-ai-data-processing-module
+      dockerfile: Dockerfile-ai-python
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -47,7 +47,7 @@ public class MonitoringController {
 			}
 
 			// Send monitoring data to the Python server
-			String pythonServerUrl = "http://localhost:5000/process-monitoring-data";
+			String pythonServerUrl = "http://python-service:5000/process-monitoring-data";
 
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Content-Type", "application/json");

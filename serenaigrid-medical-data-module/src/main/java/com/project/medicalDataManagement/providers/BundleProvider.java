@@ -47,7 +47,7 @@ public class BundleProvider implements IResourceProvider {
             Bundle bundle = bundles.get(id.getIdPart());
 
             // Now we send the bundle to Python for processing
-            String pythonServerUrl = "http://localhost:5000/process-bundle"; // URL of the Python server
+            String pythonServerUrl = "http://python-service:5000/process-bundle"; // URL of the Python server
 
             // Serialize the Bundle in JSON
             IParser parser = fhirContext.newJsonParser();
