@@ -4,14 +4,14 @@
         "id": "1",
         "meta": {
             "versionId": "1",
-            "lastUpdated": "2025-01-20T22:23:47.355+01:00"
+            "lastUpdated": "2025-01-21T16:15:23.615+01:00"
         },
         "type": "collection",
         "entry": [
             {
                 "resource": {
                     "resourceType": "Observation",
-                    "id": "5bd2bd84-9aa9-49ab-8b18-51542f502a4c",
+                    "id": "134540fa-0edd-475d-9831-1583f84fcda7",
                     "extension": [
                         {
                             "url": "http://emergency.org/fhir/network-priority",
@@ -20,14 +20,14 @@
                         {
                             "url": "http://emergency.org/fhir/network-latency",
                             "valueQuantity": {
-                                "value": 138.28586316689842,
+                                "value": 133.04411151483333,
                                 "unit": "ms"
                             }
                         },
                         {
                             "url": "http://emergency.org/fhir/network-bandwidth",
                             "valueQuantity": {
-                                "value": 0.5101325867517881,
+                                "value": 66.52205575741667,
                                 "unit": "Mbps"
                             }
                         }
@@ -37,18 +37,18 @@
                         "coding": [
                             {
                                 "system": "http://loinc.org",
-                                "code": "LA24090-6",
-                                "display": "Traumatic injury"
+                                "code": "LA14546-8",
+                                "display": "Stroke event"
                             }
                         ]
                     },
                     "subject": {
                         "reference": "Patient/1"
                     },
-                    "effectiveDateTime": "2025-01-20T22:21:25+01:00",
+                    "effectiveDateTime": "2025-01-21T16:13:07+01:00",
                     "note": [
                         {
-                            "text": "Emergency #1: Traumatic injury"
+                            "text": "Emergency #1: Stroke event"
                         }
                     ],
                     "component": [
@@ -63,7 +63,7 @@
                                 ]
                             },
                             "valueQuantity": {
-                                "value": 0.0036889713457991333,
+                                "value": 0.5,
                                 "unit": "QoS Unit"
                             }
                         }
@@ -73,7 +73,7 @@
             {
                 "resource": {
                     "resourceType": "Observation",
-                    "id": "cd22d989-83c1-4c41-976c-4aa2a2f5871f",
+                    "id": "14bd46c2-84ca-4409-8ff8-ec83cafd21d5",
                     "extension": [
                         {
                             "url": "http://emergency.org/fhir/network-priority",
@@ -82,14 +82,14 @@
                         {
                             "url": "http://emergency.org/fhir/network-latency",
                             "valueQuantity": {
-                                "value": 117.57847125053765,
+                                "value": 174.94341230842053,
                                 "unit": "ms"
                             }
                         },
                         {
                             "url": "http://emergency.org/fhir/network-bandwidth",
                             "valueQuantity": {
-                                "value": 6.81573324970508,
+                                "value": 87.47170615421027,
                                 "unit": "Mbps"
                             }
                         }
@@ -99,18 +99,18 @@
                         "coding": [
                             {
                                 "system": "http://loinc.org",
-                                "code": "LA24090-6",
-                                "display": "Traumatic injury"
+                                "code": "LA19926-4",
+                                "display": "Cardiac arrest event"
                             }
                         ]
                     },
                     "subject": {
                         "reference": "Patient/2"
                     },
-                    "effectiveDateTime": "2025-01-20T22:21:25+01:00",
+                    "effectiveDateTime": "2025-01-21T16:13:07+01:00",
                     "note": [
                         {
-                            "text": "Emergency #2: Traumatic injury"
+                            "text": "Emergency #2: Cardiac arrest event"
                         }
                     ],
                     "component": [
@@ -125,7 +125,7 @@
                                 ]
                             },
                             "valueQuantity": {
-                                "value": 0.0579675273646145,
+                                "value": 0.5,
                                 "unit": "QoS Unit"
                             }
                         }
@@ -135,7 +135,7 @@
             {
                 "resource": {
                     "resourceType": "Observation",
-                    "id": "8622ce1c-82e6-4c78-8b61-a0f8197449e9",
+                    "id": "66a179a9-bf8c-44ed-b68b-df0855781b45",
                     "extension": [
                         {
                             "url": "http://emergency.org/fhir/network-priority",
@@ -144,14 +144,14 @@
                         {
                             "url": "http://emergency.org/fhir/network-latency",
                             "valueQuantity": {
-                                "value": 57.25321646958961,
+                                "value": 39.77403370266903,
                                 "unit": "ms"
                             }
                         },
                         {
                             "url": "http://emergency.org/fhir/network-bandwidth",
                             "valueQuantity": {
-                                "value": 62.15905583038469,
+                                "value": 89.18897902157966,
                                 "unit": "Mbps"
                             }
                         }
@@ -169,7 +169,7 @@
                     "subject": {
                         "reference": "Patient/3"
                     },
-                    "effectiveDateTime": "2025-01-20T22:21:25+01:00",
+                    "effectiveDateTime": "2025-01-21T16:13:07+01:00",
                     "note": [
                         {
                             "text": "Emergency #3: Severe allergic reaction"
@@ -187,7 +187,7 @@
                                 ]
                             },
                             "valueQuantity": {
-                                "value": 1.085686703093805,
+                                "value": 2.242392101548268,
                                 "unit": "QoS Unit"
                             }
                         }
@@ -197,87 +197,59 @@
             {
                 "resource": {
                     "resourceType": "Observation",
-                    "id": "f4990f95-e72f-40c0-89cb-3dffb4182dc0",
+                    "id": "0dc6b383-a77a-4964-8b80-64cc0fc108e2",
                     "extension": [
                         {
-                            "url": "http://telemedicine.org/fhir/network-priority",
-                            "valueString": "Low"
+                            "url": "http://emergency.org/fhir/network-priority",
+                            "valueString": "High"
                         },
                         {
-                            "url": "http://telemedicine.org/fhir/network-latency",
+                            "url": "http://emergency.org/fhir/network-latency",
                             "valueQuantity": {
-                                "value": 158.18425168377988,
+                                "value": 41.73012365565138,
                                 "unit": "ms"
                             }
                         },
                         {
-                            "url": "http://telemedicine.org/fhir/network-bandwidth",
+                            "url": "http://emergency.org/fhir/network-bandwidth",
                             "valueQuantity": {
-                                "value": 63.930718631597315,
+                                "value": 72.43888025874998,
                                 "unit": "Mbps"
                             }
                         }
                     ],
                     "status": "final",
-                    "effectiveDateTime": "2025-01-20T22:21:25+01:00",
-                    "component": [
-                        {
-                            "code": {
-                                "coding": [
-                                    {
-                                        "system": "http://telemedicine.org/fhir/network-qos",
-                                        "code": "telemedicine-qos",
-                                        "display": "Telemedicine QoS Metrics"
-                                    }
-                                ]
-                            },
-                            "valueQuantity": {
-                                "value": 0.40415349790571303,
-                                "unit": "QoS Unit"
+                    "code": {
+                        "coding": [
+                            {
+                                "system": "http://loinc.org",
+                                "code": "LA10317-0",
+                                "display": "Severe allergic reaction"
                             }
-                        }
-                    ]
-                }
-            },
-            {
-                "resource": {
-                    "resourceType": "Observation",
-                    "id": "c6dbcf27-d426-4223-a77b-66ee6a2ed29a",
-                    "extension": [
+                        ]
+                    },
+                    "subject": {
+                        "reference": "Patient/4"
+                    },
+                    "effectiveDateTime": "2025-01-21T16:13:07+01:00",
+                    "note": [
                         {
-                            "url": "http://telemedicine.org/fhir/network-priority",
-                            "valueString": "Normal"
-                        },
-                        {
-                            "url": "http://telemedicine.org/fhir/network-latency",
-                            "valueQuantity": {
-                                "value": 58.48377425694788,
-                                "unit": "ms"
-                            }
-                        },
-                        {
-                            "url": "http://telemedicine.org/fhir/network-bandwidth",
-                            "valueQuantity": {
-                                "value": 6.4273159621177856,
-                                "unit": "Mbps"
-                            }
+                            "text": "Emergency #4: Severe allergic reaction"
                         }
                     ],
-                    "status": "final",
-                    "effectiveDateTime": "2025-01-20T22:21:25+01:00",
                     "component": [
                         {
                             "code": {
                                 "coding": [
                                     {
-                                        "system": "http://telemedicine.org/fhir/network-qos",
-                                        "code": "telemedicine-qos",
-                                        "display": "Telemedicine QoS Metrics"
+                                        "system": "http://emergency.org/fhir/network-qos",
+                                        "code": "emergency-qos",
+                                        "display": "Emergency QoS Metrics"
                                     }
                                 ]
                             },
                             "valueQuantity": {
-                                "value": 0.10989913089191947,
+                                "value": 1.735889422626712,
                                 "unit": "QoS Unit"
                             }
                         }
@@ -287,52 +259,7 @@
             {
                 "resource": {
                     "resourceType": "Observation",
-                    "id": "db75ad3b-859e-4121-a37e-cbaea4f16e76",
-                    "extension": [
-                        {
-                            "url": "http://telemedicine.org/fhir/network-priority",
-                            "valueString": "Low"
-                        },
-                        {
-                            "url": "http://telemedicine.org/fhir/network-latency",
-                            "valueQuantity": {
-                                "value": 24.22246894417286,
-                                "unit": "ms"
-                            }
-                        },
-                        {
-                            "url": "http://telemedicine.org/fhir/network-bandwidth",
-                            "valueQuantity": {
-                                "value": 96.61775270041366,
-                                "unit": "Mbps"
-                            }
-                        }
-                    ],
-                    "status": "final",
-                    "effectiveDateTime": "2025-01-20T22:21:25+01:00",
-                    "component": [
-                        {
-                            "code": {
-                                "coding": [
-                                    {
-                                        "system": "http://telemedicine.org/fhir/network-qos",
-                                        "code": "telemedicine-qos",
-                                        "display": "Telemedicine QoS Metrics"
-                                    }
-                                ]
-                            },
-                            "valueQuantity": {
-                                "value": 3.9887656755013308,
-                                "unit": "QoS Unit"
-                            }
-                        }
-                    ]
-                }
-            },
-            {
-                "resource": {
-                    "resourceType": "Observation",
-                    "id": "97dee169-259e-4a4a-b4ce-5856089fa371",
+                    "id": "6b7ac2c0-8f98-434c-ae2b-b9048b876f51",
                     "extension": [
                         {
                             "url": "http://telemedicine.org/fhir/network-priority",
@@ -341,20 +268,20 @@
                         {
                             "url": "http://telemedicine.org/fhir/network-latency",
                             "valueQuantity": {
-                                "value": 166.45210599850773,
+                                "value": 144.1827587796655,
                                 "unit": "ms"
                             }
                         },
                         {
                             "url": "http://telemedicine.org/fhir/network-bandwidth",
                             "valueQuantity": {
-                                "value": 22.45097710290804,
+                                "value": 71.78117665681954,
                                 "unit": "Mbps"
                             }
                         }
                     ],
                     "status": "final",
-                    "effectiveDateTime": "2025-01-20T22:21:25+01:00",
+                    "effectiveDateTime": "2025-01-21T16:13:07+01:00",
                     "component": [
                         {
                             "code": {
@@ -367,7 +294,142 @@
                                 ]
                             },
                             "valueQuantity": {
-                                "value": 0.13487950163339668,
+                                "value": 0.49784854489095154,
+                                "unit": "QoS Unit"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "resource": {
+                    "resourceType": "Observation",
+                    "id": "008dcd06-d1b8-4f35-a9e9-f1e96ce6a2f7",
+                    "extension": [
+                        {
+                            "url": "http://telemedicine.org/fhir/network-priority",
+                            "valueString": "Low"
+                        },
+                        {
+                            "url": "http://telemedicine.org/fhir/network-latency",
+                            "valueQuantity": {
+                                "value": 67.13443116242838,
+                                "unit": "ms"
+                            }
+                        },
+                        {
+                            "url": "http://telemedicine.org/fhir/network-bandwidth",
+                            "valueQuantity": {
+                                "value": 13.426886232485678,
+                                "unit": "Mbps"
+                            }
+                        }
+                    ],
+                    "status": "final",
+                    "effectiveDateTime": "2025-01-21T16:13:07+01:00",
+                    "component": [
+                        {
+                            "code": {
+                                "coding": [
+                                    {
+                                        "system": "http://telemedicine.org/fhir/network-qos",
+                                        "code": "telemedicine-qos",
+                                        "display": "Telemedicine QoS Metrics"
+                                    }
+                                ]
+                            },
+                            "valueQuantity": {
+                                "value": 0.2,
+                                "unit": "QoS Unit"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "resource": {
+                    "resourceType": "Observation",
+                    "id": "36026dfc-1921-47fd-a955-06c924bf7656",
+                    "extension": [
+                        {
+                            "url": "http://telemedicine.org/fhir/network-priority",
+                            "valueString": "Normal"
+                        },
+                        {
+                            "url": "http://telemedicine.org/fhir/network-latency",
+                            "valueQuantity": {
+                                "value": 11.124911607302245,
+                                "unit": "ms"
+                            }
+                        },
+                        {
+                            "url": "http://telemedicine.org/fhir/network-bandwidth",
+                            "valueQuantity": {
+                                "value": 5.5624558036511225,
+                                "unit": "Mbps"
+                            }
+                        }
+                    ],
+                    "status": "final",
+                    "effectiveDateTime": "2025-01-21T16:13:07+01:00",
+                    "component": [
+                        {
+                            "code": {
+                                "coding": [
+                                    {
+                                        "system": "http://telemedicine.org/fhir/network-qos",
+                                        "code": "telemedicine-qos",
+                                        "display": "Telemedicine QoS Metrics"
+                                    }
+                                ]
+                            },
+                            "valueQuantity": {
+                                "value": 0.5,
+                                "unit": "QoS Unit"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "resource": {
+                    "resourceType": "Observation",
+                    "id": "080734fd-ba16-4b50-98fb-67eed7e4bd76",
+                    "extension": [
+                        {
+                            "url": "http://telemedicine.org/fhir/network-priority",
+                            "valueString": "Low"
+                        },
+                        {
+                            "url": "http://telemedicine.org/fhir/network-latency",
+                            "valueQuantity": {
+                                "value": 69.64236381903184,
+                                "unit": "ms"
+                            }
+                        },
+                        {
+                            "url": "http://telemedicine.org/fhir/network-bandwidth",
+                            "valueQuantity": {
+                                "value": 13.928472763806369,
+                                "unit": "Mbps"
+                            }
+                        }
+                    ],
+                    "status": "final",
+                    "effectiveDateTime": "2025-01-21T16:13:07+01:00",
+                    "component": [
+                        {
+                            "code": {
+                                "coding": [
+                                    {
+                                        "system": "http://telemedicine.org/fhir/network-qos",
+                                        "code": "telemedicine-qos",
+                                        "display": "Telemedicine QoS Metrics"
+                                    }
+                                ]
+                            },
+                            "valueQuantity": {
+                                "value": 0.2,
                                 "unit": "QoS Unit"
                             }
                         }
@@ -377,7 +439,7 @@
             {
                 "resource": {
                     "resourceType": "Device",
-                    "id": "941ff468-8c64-4767-854f-065fe60548f5",
+                    "id": "49fcea05-3291-459b-abce-6a8446cc2c9e",
                     "status": "inactive",
                     "type": {
                         "coding": [
@@ -391,7 +453,7 @@
                         {
                             "valueQuantity": [
                                 {
-                                    "value": 9,
+                                    "value": 3,
                                     "unit": "units"
                                 }
                             ]
@@ -402,8 +464,35 @@
             {
                 "resource": {
                     "resourceType": "Device",
-                    "id": "e5bc183b-0bb6-4abb-96c8-57426bc3a176",
-                    "status": "inactive",
+                    "id": "2f8d7edd-a507-45b9-b46a-9a39a3c7cbea",
+                    "extension": [
+                        {
+                            "url": "http://device.org/fhir/network-priority",
+                            "valueString": "High"
+                        },
+                        {
+                            "url": "http://device.org/fhir/network-latency",
+                            "valueQuantity": {
+                                "value": 120.31830586320906,
+                                "unit": "ms"
+                            }
+                        },
+                        {
+                            "url": "http://device.org/fhir/network-bandwidth",
+                            "valueQuantity": {
+                                "value": 60.15915293160453,
+                                "unit": "Mbps"
+                            }
+                        },
+                        {
+                            "url": "http://device.org/fhir/network-qos",
+                            "valueQuantity": {
+                                "value": 0.5,
+                                "unit": "QoS Unit"
+                            }
+                        }
+                    ],
+                    "status": "active",
                     "type": {
                         "coding": [
                             {
@@ -416,7 +505,7 @@
                         {
                             "valueQuantity": [
                                 {
-                                    "value": 6,
+                                    "value": 2,
                                     "unit": "units"
                                 }
                             ]
@@ -427,35 +516,8 @@
             {
                 "resource": {
                     "resourceType": "Device",
-                    "id": "f5c7764b-2cc3-4c0e-abac-f44342103d86",
-                    "extension": [
-                        {
-                            "url": "http://device.org/fhir/network-priority",
-                            "valueString": "High"
-                        },
-                        {
-                            "url": "http://device.org/fhir/network-latency",
-                            "valueQuantity": {
-                                "value": 189.42379632833627,
-                                "unit": "ms"
-                            }
-                        },
-                        {
-                            "url": "http://device.org/fhir/network-bandwidth",
-                            "valueQuantity": {
-                                "value": 51.71317530421094,
-                                "unit": "Mbps"
-                            }
-                        },
-                        {
-                            "url": "http://device.org/fhir/network-qos",
-                            "valueQuantity": {
-                                "value": 0.2730025282281552,
-                                "unit": "QoS Unit"
-                            }
-                        }
-                    ],
-                    "status": "active",
+                    "id": "c00b34b5-c390-4507-8ad1-c1999562beaa",
+                    "status": "inactive",
                     "type": {
                         "coding": [
                             {
@@ -468,7 +530,7 @@
                         {
                             "valueQuantity": [
                                 {
-                                    "value": 8,
+                                    "value": 2,
                                     "unit": "units"
                                 }
                             ]
@@ -480,26 +542,56 @@
     },
     "network_data": {
         "networkDetails": {
-            "networkId": "9b40abaf-ff60-40b7-b50a-0c594f16e35d",
+            "networkId": "4cab21e7-28b5-45d8-8671-1d302e1eba81",
             "name": "Network A",
             "type": "WAN",
-            "nodeCount": 2,
+            "nodeCount": 7,
             "description": "Network A"
         },
         "networkMetrics": [
             {
-                "id": "b83db409-36be-4cc9-8038-85724327a4da",
-                "ipAddress": "52.61.59.91",
-                "bandwidthUsage": 8.565195081232712,
-                "latency": 155.938719528388
+                "id": "88891fa4-55ed-49fb-a5be-d44427dadd71",
+                "ipAddress": "143.203.186.186",
+                "bandwidthUsage": 73.88933842284212,
+                "latency": 270.902876091232
             },
             {
-                "id": "306410e7-d51d-4b31-a76e-94bc269e517a",
-                "ipAddress": "9.111.67.43",
-                "bandwidthUsage": 23.636153204266265,
-                "latency": 169.20496294457692
+                "id": "b316b277-9f0e-4099-84c9-db9fa9a29066",
+                "ipAddress": "182.126.61.179",
+                "bandwidthUsage": 39.53118130403076,
+                "latency": 103.70882175920173
+            },
+            {
+                "id": "c2066ffb-9afc-4916-8f98-e5fd0a07b2f1",
+                "ipAddress": "43.31.184.85",
+                "bandwidthUsage": 0.88865770612917,
+                "latency": 249.55422542009015
+            },
+            {
+                "id": "1ef414e0-17c2-4151-b8de-71fd4d538b93",
+                "ipAddress": "114.51.211.9",
+                "bandwidthUsage": 96.0297950834709,
+                "latency": 154.8475742869137
+            },
+            {
+                "id": "195b9c63-4b7e-4146-9fa5-6defd24f88dd",
+                "ipAddress": "197.112.28.171",
+                "bandwidthUsage": 78.40477627133899,
+                "latency": 276.57650477471907
+            },
+            {
+                "id": "e8df124d-17f7-4ccf-9b81-47b9db90504a",
+                "ipAddress": "2.167.180.153",
+                "bandwidthUsage": 4.366137444143314,
+                "latency": 218.29630366422927
+            },
+            {
+                "id": "04dfeb74-f13c-44ba-bce7-ea92e4e1c8f8",
+                "ipAddress": "80.206.228.153",
+                "bandwidthUsage": 70.92349174987737,
+                "latency": 202.13764546960934
             }
         ],
-        "effectiveDateTime": "2025-01-20T22:23:15.7586469+01:00"
+        "effectiveDateTime": "2025-01-21T16:23:08.9696695+01:00"
     }
 }

@@ -1,106 +1,154 @@
 {
     "allocations": [
         {
-            "node_id": "b83db409-36be-4cc9-8038-85724327a4da",
-            "emergency_id": "5bd2bd84-9aa9-49ab-8b18-51542f502a4c",
+            "node_id": "1ef414e0-17c2-4151-b8de-71fd4d538b93",
+            "emergency_id": "134540fa-0edd-475d-9831-1583f84fcda7",
             "emergency_priority": "High",
-            "emergency_type": "Emergency #1: Traumatic injury",
-            "emergency_QoS": 0.0036889713457991333,
-            "emergency_bandwidth": 0.5101325867517881,
+            "emergency_type": "Emergency #1: Stroke event",
+            "emergency_QoS": 0.5,
+            "emergency_bandwidth": 66.52205575741667,
             "patient_reference": "Patient/1"
         },
         {
-            "node_id": "b83db409-36be-4cc9-8038-85724327a4da",
-            "emergency_id": "cd22d989-83c1-4c41-976c-4aa2a2f5871f",
+            "node_id": "195b9c63-4b7e-4146-9fa5-6defd24f88dd",
+            "emergency_id": "0dc6b383-a77a-4964-8b80-64cc0fc108e2",
             "emergency_priority": "High",
-            "emergency_type": "Emergency #2: Traumatic injury",
-            "emergency_QoS": 0.0579675273646145,
-            "emergency_bandwidth": 6.81573324970508,
-            "patient_reference": "Patient/2"
+            "emergency_type": "Emergency #4: Severe allergic reaction",
+            "emergency_QoS": 1.735889422626712,
+            "emergency_bandwidth": 72.43888025874998,
+            "patient_reference": "Patient/4"
         },
         {
-            "node_id": "306410e7-d51d-4b31-a76e-94bc269e517a",
-            "emergency_id": "c6dbcf27-d426-4223-a77b-66ee6a2ed29a",
+            "node_id": "88891fa4-55ed-49fb-a5be-d44427dadd71",
+            "emergency_id": "6b7ac2c0-8f98-434c-ae2b-b9048b876f51",
             "emergency_priority": "Normal",
             "emergency_type": "Telemedicine session",
-            "emergency_QoS": 0.10989913089191947,
-            "emergency_bandwidth": 6.4273159621177856,
+            "emergency_QoS": 0.49784854489095154,
+            "emergency_bandwidth": 71.78117665681954,
+            "patient_reference": null
+        },
+        {
+            "node_id": "1ef414e0-17c2-4151-b8de-71fd4d538b93",
+            "emergency_id": "36026dfc-1921-47fd-a955-06c924bf7656",
+            "emergency_priority": "Normal",
+            "emergency_type": "Telemedicine session",
+            "emergency_QoS": 0.5,
+            "emergency_bandwidth": 5.5624558036511225,
+            "patient_reference": null
+        },
+        {
+            "node_id": "1ef414e0-17c2-4151-b8de-71fd4d538b93",
+            "emergency_id": "008dcd06-d1b8-4f35-a9e9-f1e96ce6a2f7",
+            "emergency_priority": "Low",
+            "emergency_type": "Telemedicine session",
+            "emergency_QoS": 0.2,
+            "emergency_bandwidth": 13.426886232485678,
+            "patient_reference": null
+        },
+        {
+            "node_id": "04dfeb74-f13c-44ba-bce7-ea92e4e1c8f8",
+            "emergency_id": "080734fd-ba16-4b50-98fb-67eed7e4bd76",
+            "emergency_priority": "Low",
+            "emergency_type": "Telemedicine session",
+            "emergency_QoS": 0.2,
+            "emergency_bandwidth": 13.928472763806369,
             "patient_reference": null
         }
     ],
     "summary": {
         "handled_emergencies": [
             {
-                "node_id": "b83db409-36be-4cc9-8038-85724327a4da",
-                "emergency_id": "5bd2bd84-9aa9-49ab-8b18-51542f502a4c",
+                "node_id": "1ef414e0-17c2-4151-b8de-71fd4d538b93",
+                "emergency_id": "134540fa-0edd-475d-9831-1583f84fcda7",
                 "emergency_priority": "High",
-                "emergency_type": "Emergency #1: Traumatic injury",
-                "emergency_QoS": 0.0036889713457991333,
-                "emergency_bandwidth": 0.5101325867517881,
+                "emergency_type": "Emergency #1: Stroke event",
+                "emergency_QoS": 0.5,
+                "emergency_bandwidth": 66.52205575741667,
                 "patient_reference": "Patient/1"
             },
             {
-                "node_id": "b83db409-36be-4cc9-8038-85724327a4da",
-                "emergency_id": "cd22d989-83c1-4c41-976c-4aa2a2f5871f",
+                "node_id": "195b9c63-4b7e-4146-9fa5-6defd24f88dd",
+                "emergency_id": "0dc6b383-a77a-4964-8b80-64cc0fc108e2",
                 "emergency_priority": "High",
-                "emergency_type": "Emergency #2: Traumatic injury",
-                "emergency_QoS": 0.0579675273646145,
-                "emergency_bandwidth": 6.81573324970508,
-                "patient_reference": "Patient/2"
+                "emergency_type": "Emergency #4: Severe allergic reaction",
+                "emergency_QoS": 1.735889422626712,
+                "emergency_bandwidth": 72.43888025874998,
+                "patient_reference": "Patient/4"
             },
             {
-                "node_id": "306410e7-d51d-4b31-a76e-94bc269e517a",
-                "emergency_id": "c6dbcf27-d426-4223-a77b-66ee6a2ed29a",
+                "node_id": "88891fa4-55ed-49fb-a5be-d44427dadd71",
+                "emergency_id": "6b7ac2c0-8f98-434c-ae2b-b9048b876f51",
                 "emergency_priority": "Normal",
                 "emergency_type": "Telemedicine session",
-                "emergency_QoS": 0.10989913089191947,
-                "emergency_bandwidth": 6.4273159621177856,
+                "emergency_QoS": 0.49784854489095154,
+                "emergency_bandwidth": 71.78117665681954,
+                "patient_reference": null
+            },
+            {
+                "node_id": "1ef414e0-17c2-4151-b8de-71fd4d538b93",
+                "emergency_id": "36026dfc-1921-47fd-a955-06c924bf7656",
+                "emergency_priority": "Normal",
+                "emergency_type": "Telemedicine session",
+                "emergency_QoS": 0.5,
+                "emergency_bandwidth": 5.5624558036511225,
+                "patient_reference": null
+            },
+            {
+                "node_id": "1ef414e0-17c2-4151-b8de-71fd4d538b93",
+                "emergency_id": "008dcd06-d1b8-4f35-a9e9-f1e96ce6a2f7",
+                "emergency_priority": "Low",
+                "emergency_type": "Telemedicine session",
+                "emergency_QoS": 0.2,
+                "emergency_bandwidth": 13.426886232485678,
+                "patient_reference": null
+            },
+            {
+                "node_id": "04dfeb74-f13c-44ba-bce7-ea92e4e1c8f8",
+                "emergency_id": "080734fd-ba16-4b50-98fb-67eed7e4bd76",
+                "emergency_priority": "Low",
+                "emergency_type": "Telemedicine session",
+                "emergency_QoS": 0.2,
+                "emergency_bandwidth": 13.928472763806369,
                 "patient_reference": null
             }
         ],
         "unhandled_emergencies": [
             {
-                "emergency_id": "8622ce1c-82e6-4c78-8b61-a0f8197449e9",
+                "emergency_id": "14bd46c2-84ca-4409-8ff8-ec83cafd21d5",
                 "emergency_priority": "High",
-                "emergency_bandwidth": 62.15905583038469,
-                "emergency_QoS": 1.085686703093805,
+                "emergency_bandwidth": 87.47170615421027,
+                "emergency_QoS": 0.5,
+                "emergency_type": "Emergency #2: Cardiac arrest event",
+                "patient_reference": "Patient/2"
+            },
+            {
+                "emergency_id": "66a179a9-bf8c-44ed-b68b-df0855781b45",
+                "emergency_priority": "High",
+                "emergency_bandwidth": 89.18897902157966,
+                "emergency_QoS": 2.242392101548268,
                 "emergency_type": "Emergency #3: Severe allergic reaction",
                 "patient_reference": "Patient/3"
-            },
-            {
-                "emergency_id": "97dee169-259e-4a4a-b4ce-5856089fa371",
-                "emergency_priority": "Normal",
-                "emergency_bandwidth": 22.45097710290804,
-                "emergency_QoS": 0.13487950163339668,
-                "emergency_type": "Telemedicine session",
-                "patient_reference": null
-            },
-            {
-                "emergency_id": "f4990f95-e72f-40c0-89cb-3dffb4182dc0",
-                "emergency_priority": "Low",
-                "emergency_bandwidth": 63.930718631597315,
-                "emergency_QoS": 0.40415349790571303,
-                "emergency_type": "Telemedicine session",
-                "patient_reference": null
-            },
-            {
-                "emergency_id": "db75ad3b-859e-4121-a37e-cbaea4f16e76",
-                "emergency_priority": "Low",
-                "emergency_bandwidth": 96.61775270041366,
-                "emergency_QoS": 3.9887656755013308,
-                "emergency_type": "Telemedicine session",
-                "patient_reference": null
             }
         ],
-        "initial_bandwidth": 32.20134828549898,
-        "remaining_bandwidth": 18.44816648692433,
+        "initial_bandwidth": 364.0333779818326,
+        "remaining_bandwidth": 120.37345050890328,
         "node_bandwidth_initial_allocation": {
-            "b83db409-36be-4cc9-8038-85724327a4da": 8.565195081232712,
-            "306410e7-d51d-4b31-a76e-94bc269e517a": 23.636153204266265
+            "1ef414e0-17c2-4151-b8de-71fd4d538b93": 96.0297950834709,
+            "195b9c63-4b7e-4146-9fa5-6defd24f88dd": 78.40477627133899,
+            "88891fa4-55ed-49fb-a5be-d44427dadd71": 73.88933842284212,
+            "04dfeb74-f13c-44ba-bce7-ea92e4e1c8f8": 70.92349174987737,
+            "b316b277-9f0e-4099-84c9-db9fa9a29066": 39.53118130403076,
+            "e8df124d-17f7-4ccf-9b81-47b9db90504a": 4.366137444143314,
+            "c2066ffb-9afc-4916-8f98-e5fd0a07b2f1": 0.88865770612917
         },
         "node_bandwidth_final_allocation": {
-            "b83db409-36be-4cc9-8038-85724327a4da": 1.2393292447758446,
-            "306410e7-d51d-4b31-a76e-94bc269e517a": 17.20883724214848
+            "1ef414e0-17c2-4151-b8de-71fd4d538b93": 10.518397289917434,
+            "195b9c63-4b7e-4146-9fa5-6defd24f88dd": 5.965896012589013,
+            "88891fa4-55ed-49fb-a5be-d44427dadd71": 2.108161766022576,
+            "04dfeb74-f13c-44ba-bce7-ea92e4e1c8f8": 56.995018986071,
+            "b316b277-9f0e-4099-84c9-db9fa9a29066": 39.53118130403076,
+            "e8df124d-17f7-4ccf-9b81-47b9db90504a": 4.366137444143314,
+            "c2066ffb-9afc-4916-8f98-e5fd0a07b2f1": 0.88865770612917
         }
     }
 }

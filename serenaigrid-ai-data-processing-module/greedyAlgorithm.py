@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from matplotlib.patches import Rectangle
+from matplotlib import colormaps
 import pandas as pd
 import json
 import numpy as np
@@ -80,11 +81,16 @@ def optimize_bandwidth_allocation(medical_data, network_data):
     emergencies_sorted = sorted(emergencies, key=lambda x: (
         priority_map[x['emergency_priority']], x['emergency_QoS']))
 
+    # Sort nodes by available bandwidth in descending order
+    nodes_sorted = sorted(
+        nodes, key=lambda x: x['bandwidthUsage'], reverse=True)
+    node_bandwidth = {node['id']: node['bandwidthUsage']
+                      for node in nodes_sorted}
+    node_bandwidth_initial_allocation = node_bandwidth.copy()
+
     # Allocate bandwidth dynamically across nodes
     allocations = []
     unhandled_emergencies = []
-    node_bandwidth = {node['id']: node['bandwidthUsage'] for node in nodes}
-    node_bandwidth_initial_allocation = node_bandwidth.copy()
 
     for emergency in emergencies_sorted:
         if total_bandwidth <= 0:
@@ -164,7 +170,7 @@ print("\n")
 print("Summary:", result['summary'])
 
 
-''' Part 2: Salvataggio dei dati da passare a Llama3 per la generazione di report '''
+''' Part 2: Saving data to be passed to Llama3 for report generation '''
 
 save_result_to_json(result, path=RESULT_PATH)
 
@@ -237,8 +243,10 @@ nodes = [e["node_id"] for e in sorted_emergencies]
 unique_nodes = list(set(nodes))  # Find the unique nodes
 
 # Creating a palette of contrasting colours
-colormap = plt.cm.get_cmap('Accent', len(unique_nodes))
-node_colors = {node: colormap(i) for i, node in enumerate(unique_nodes)}
+base_colormap = colormaps.get_cmap('Accent')
+node_colors_array = base_colormap(np.linspace(0, 1, len(unique_nodes)))
+node_colors = {node: mcolors.rgb2hex(color)
+               for node, color in zip(unique_nodes, node_colors_array)}
 
 # Convert the colormap to HEX format for use in charts
 node_colors = {node: mcolors.rgb2hex(color)
