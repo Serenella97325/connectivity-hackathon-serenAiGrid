@@ -20,6 +20,8 @@ import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.StringType;
 import org.springframework.stereotype.Service;
 
+import com.project.medicalDataManagement.utils.QoSResult;
+
 @Service
 public class FHIRDataGeneratorService {
 
@@ -27,7 +29,7 @@ public class FHIRDataGeneratorService {
 
     Date now = new Date(System.currentTimeMillis());  // Get current time with milliseconds
     
-    // Mappa per tipi di emergenze e codici associati
+    // Map by types of emergencies and associated codes
     private static final Map<String, String> EMERGENCY_MAP = new HashMap<>();
     static {
         EMERGENCY_MAP.put("Cardiac arrest event", "LA19926-4");
@@ -67,11 +69,16 @@ public class FHIRDataGeneratorService {
             // Generate random values for latency and bandwidth
             double latency = random.nextDouble() * 200; // Latenza in ms
             double bandwidth = random.nextDouble() * 100; // Banda in Mbps
+            
+            String networkPriority = "High";
+            
+            // Calculate QoS by prioritizing
+            QoSResult qosResult = calculateQoS(networkPriority, latency, bandwidth);
 
             // Extensions for the network
-            emergency.addExtension(createNetworkExtension("http://emergency.org/fhir/network-priority", "High"));
-            emergency.addExtension(createNetworkExtension("http://emergency.org/fhir/network-latency", latency, "ms"));
-            emergency.addExtension(createNetworkExtension("http://emergency.org/fhir/network-bandwidth", bandwidth, "Mbps"));
+            emergency.addExtension(createNetworkExtension("http://emergency.org/fhir/network-priority", networkPriority));
+            emergency.addExtension(createNetworkExtension("http://emergency.org/fhir/network-latency", qosResult.getLatency(), "ms"));
+            emergency.addExtension(createNetworkExtension("http://emergency.org/fhir/network-bandwidth", qosResult.getBandwidth(), "Mbps"));
             
             // Quality of Service (QoS) 
             CodeableConcept qosCode = new CodeableConcept();
@@ -81,7 +88,7 @@ public class FHIRDataGeneratorService {
                 .setDisplay("Emergency QoS Metrics");
             emergency.addComponent()
                 .setCode(qosCode)
-                .setValue(new Quantity(bandwidth / latency).setUnit("QoS Unit")); // QoS = Banda / Latenza
+                .setValue(new Quantity(qosResult.getQos()).setUnit("QoS Unit")); // QoS = Banda / Latenza
             
             emergencies.add(emergency);
         }
@@ -110,10 +117,13 @@ public class FHIRDataGeneratorService {
             // Generate random priority ("Normal" or "Low")
             String networkPriority = random.nextBoolean() ? "Normal" : "Low";
             
+            // Calculate QoS by prioritizing
+            QoSResult qosResult = calculateQoS(networkPriority, latency, bandwidth);
+            
             // Extensions for the network
             telemedicine.addExtension(createNetworkExtension("http://telemedicine.org/fhir/network-priority", networkPriority));
-            telemedicine.addExtension(createNetworkExtension("http://telemedicine.org/fhir/network-latency", latency, "ms"));
-            telemedicine.addExtension(createNetworkExtension("http://telemedicine.org/fhir/network-bandwidth", bandwidth, "Mbps"));
+            telemedicine.addExtension(createNetworkExtension("http://telemedicine.org/fhir/network-latency", qosResult.getLatency(), "ms"));
+            telemedicine.addExtension(createNetworkExtension("http://telemedicine.org/fhir/network-bandwidth", qosResult.getBandwidth(), "Mbps"));
             
             // Quality of Service (QoS) 
             CodeableConcept qosCode = new CodeableConcept();
@@ -123,7 +133,7 @@ public class FHIRDataGeneratorService {
                 .setDisplay("Telemedicine QoS Metrics");
             telemedicine.addComponent()
                 .setCode(qosCode)
-                .setValue(new Quantity(bandwidth / latency).setUnit("QoS Unit")); // QoS = Banda / Latenza
+                .setValue(new Quantity(qosResult.getQos()).setUnit("QoS Unit")); // QoS = Banda / Latenza
             
             telemedicineSessions.add(telemedicine);    		
     	}
@@ -155,17 +165,19 @@ public class FHIRDataGeneratorService {
 
             // Add network properties (priority, latency, bandwidth) only if the device is ACTIVE
             if (status == Device.FHIRDeviceStatus.ACTIVE) {
-                // Generate random values for network priority, latency, and bandwidth
+               
                 String networkPriority = "High";  
                 double latency = random.nextDouble() * 200; // Latency in ms
                 double bandwidth = random.nextDouble() * 100; // Bandwidth in Mbps
-                double qos = bandwidth / latency;
+                
+                // Calculate QoS by prioritizing
+                QoSResult qosResult = calculateQoS(networkPriority, latency, bandwidth);
 
                 // Extensions for the network
                 device.addExtension(createNetworkExtension("http://device.org/fhir/network-priority", networkPriority));
-                device.addExtension(createNetworkExtension("http://device.org/fhir/network-latency", latency, "ms"));
-                device.addExtension(createNetworkExtension("http://device.org/fhir/network-bandwidth", bandwidth, "Mbps"));
-                device.addExtension(createNetworkExtension("http://device.org/fhir/network-qos", qos, "QoS Unit"));
+                device.addExtension(createNetworkExtension("http://device.org/fhir/network-latency", qosResult.getLatency(), "ms"));
+                device.addExtension(createNetworkExtension("http://device.org/fhir/network-bandwidth", qosResult.getBandwidth(), "Mbps"));
+                device.addExtension(createNetworkExtension("http://device.org/fhir/network-qos", qosResult.getQos(), "QoS Unit"));
 
             }
 
@@ -227,4 +239,39 @@ public class FHIRDataGeneratorService {
         List<String> keys = new ArrayList<>(EMERGENCY_MAP.keySet());
         return keys.get(random.nextInt(keys.size()));
     }
+    
+    /**
+     * Management of QoS according to priority 
+     */
+    private QoSResult calculateQoS(String priority, double latency, double bandwidth) {
+        double qos = bandwidth / latency;
+
+        // QoS thresholds by priority
+        switch (priority) {
+            case "High":
+                if (qos < 0.5) {
+                    bandwidth = Math.max(bandwidth, latency * 0.5);
+                    qos = bandwidth / latency;
+                }
+                break;
+
+            case "Normal":
+                if (qos < 0.2 || qos > 0.5) {
+                    bandwidth = Math.min(bandwidth, latency * 0.5); 
+                    bandwidth = Math.max(bandwidth, latency * 0.2); 
+                    qos = bandwidth / latency;
+                }
+                break;
+
+            case "Low":
+                if (qos > 0.2) {                
+                    bandwidth = Math.min(bandwidth, latency * 0.2);
+                    qos = bandwidth / latency;
+                }
+                break;
+        }
+
+        return new QoSResult(qos, bandwidth, latency);
+    }
+
 }
