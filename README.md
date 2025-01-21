@@ -1,4 +1,4 @@
-# serenAiGrid
+# SerenAiGrid
 
 Harmonizing healthcare connectivity through AI-driven intelligence and innovation.
 
