@@ -4,7 +4,7 @@ Harmonizing healthcare connectivity through AI-driven intelligence and innovatio
 
 ## Project Overview
 
-The **serenAiGrid** project aims to optimize healthcare resource management by leveraging Artificial Intelligence (AI) and Large Language Models (LLMs). The system is designed to dynamically allocate network resources in health centers and automate medical documentation processes.
+The **SerenAiGrid** project aims to optimize healthcare resource management by leveraging Artificial Intelligence (AI) and Large Language Models (LLMs). The system is designed to dynamically allocate network resources in health centers and automate medical documentation processes.
 
 ### Key Features
 
