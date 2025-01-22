@@ -1,8 +1,16 @@
 build:
   docker:
-    medical-data-module: Dockerfile-medical
-    python-service: Dockerfile-ai-python
-    network-data-module: Dockerfile-network
+    web:
+      context: ./serenaigrid-medical-data-module
+      dockerfile: ./Dockerfile-medical # Modifica questo percorso per puntare al Dockerfile del modulo web
+    network-data-module:
+      context: ./serenaigrid-network-data-module  # Modifica il percorso del modulo network-data-module
+      dockerfile: ./serenaigrid-network-data-module/Dockerfile  # Assicurati che il Dockerfile esista nel modulo
+    python-service:
+      context: ./serenaigrid-ai-data-processing-module  # Modifica il percorso del modulo python-service
+      dockerfile: ./serenaigrid-ai-data-processing-module/Dockerfile-ai-python  # Assicurati che il Dockerfile esista nel modulo
 
+release:
+  image: true
 
 
