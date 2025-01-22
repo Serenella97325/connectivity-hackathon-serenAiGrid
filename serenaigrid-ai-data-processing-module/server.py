@@ -1,4 +1,6 @@
 import json
+import subprocess
+import threading
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
@@ -9,6 +11,7 @@ network_data = None
 
 # Path to save data
 DATA_PATH = 'data_received.json'
+RESULT_PATH = 'result.json'
 
 
 # Function to get the JSON bundle containing medical data sent from the Spring Boot server
@@ -28,8 +31,6 @@ def process_bundle():
     print("Bundle received:")
     # Readable JSON format
     print(json.dumps(medical_data, indent=4, ensure_ascii=False))
-
-    # Processing the bundle as desired (for example, performing calculations or other operations) --> TO DO with AI
 
     # After receiving the medical data, check if both sets of data are available and save combined data
     save_combined_data()
@@ -51,10 +52,8 @@ def process_monitoring_data():
         return jsonify({"status": "error", "message": "Nessun dato di monitoraggio ricevuto"}), 400
 
     # Log of data received
-    print("Dati di monitoraggio rete ricevuti:")
+    print("Network monitoring data received:")
     print(json.dumps(network_data, indent=4, ensure_ascii=False))
-
-    # Processing the network data as desired (for example, performing calculations or other operations) --> TO DO with AI
 
     # After receiving the network data, check if both sets of data are available and save combined data
     save_combined_data()
@@ -80,6 +79,48 @@ def save_combined_data():
 
         print("Combined data saved in file:")
         print(json.dumps(combined_data, indent=4, ensure_ascii=False))
+
+        # Call greedyAlgorithm.py to process the data in background
+        threading.Thread(target=run_greedy_algorithm).start()
+
+        # Call llama3.py to generate the report in background
+        threading.Thread(target=run_llama_report).start()
+
+
+# Function to run greedyAlgorithm.py
+def run_greedy_algorithm():
+    try:
+        result = subprocess.run(
+            ['python', 'greedy_algorithm.py'],
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode == 0:
+            print("Greedy Algorithm executed successfully")
+            print(result.stdout)
+        else:
+            print("Error executing greedy algorithm:", result.stderr)
+    except Exception as e:
+        print(f"Errore nell'eseguire greedy_algorithm.py: {e}")
+
+
+# Function to run llama3.py to generate the report
+def run_llama_report():
+    try:
+        result = subprocess.run(
+            ['python', 'llama_report.py'],
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode == 0:
+            print("Llama report generated successfully")
+            print(result.stdout)
+        else:
+            print("Error executing llama_report.py:", result.stderr)
+    except Exception as e:
+        print(f"Errore nell'eseguire llama_report.py: {e}")
 
 
 if __name__ == '__main__':
