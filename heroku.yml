@@ -1,9 +1,0 @@
-build:
-  docker:
-    web:
-      dockerfile: ./serenaigrid-medical-data-module/Dockerfile-medical
-    network-data-module:
-      dockerfile: ./serenaigrid-network-data-module/Dockerfile-network
-    python-service:
-      dockerfile: ./serenaigrid-ai-data-processing-module/Dockerfile-ai-python
-

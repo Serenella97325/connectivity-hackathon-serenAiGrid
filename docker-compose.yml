@@ -4,7 +4,7 @@ services:
   medical-data-module:
     build:
       context: ./serenaigrid-medical-data-module
-      dockerfile: Dockerfile-medical
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     networks:
@@ -13,7 +13,7 @@ services:
   network-data-module:
     build:
       context: ./serenaigrid-network-data-module
-      dockerfile: Dockerfile-network
+      dockerfile: Dockerfile
     ports:
       - "8081:8081"
     networks:
@@ -22,7 +22,7 @@ services:
   python-service:
     build:
       context: ./serenaigrid-ai-data-processing-module
-      dockerfile: Dockerfile-ai-python
+      dockerfile: Dockerfile
     networks:
       - app-network
 
