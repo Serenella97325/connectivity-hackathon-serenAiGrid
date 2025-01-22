@@ -1,6 +1,6 @@
 build:
   docker:
-    web: Dockerfile-web
+    medical-data-module: Dockerfile-medical
     python-service: Dockerfile-ai-python
     network-data-module: Dockerfile-network
 
