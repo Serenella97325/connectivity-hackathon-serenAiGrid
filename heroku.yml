@@ -8,4 +8,4 @@ build:
       dockerfile: ./serenaigrid-ai-data-processing-module/Dockerfile-ai-python
 
 release:
-  image: "true"
+  image: registry.heroku.com/serenai-grid-app/web
