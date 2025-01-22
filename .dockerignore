@@ -1,0 +1,8 @@
+# Esclude tutta la cartella target
+target/
+
+# Includi specificamente il file .jar che ti serve
+!target/serenaigrid-medical-data-module-0.0.1-SNAPSHOT.jar
+!target/serenaigrid-network-data-module-0.0.1-SNAPSHOT.jar
+
+
