@@ -6,9 +6,9 @@ Harmonizing healthcare connectivity through AI-driven intelligence and innovatio
 
 ## Quick Links
 - [Project Overview 🎯](#project-overview-🎯)
-- [Key Features](#key-features)
-- [System Flow](#system-flow)
-- [Modules Overview](#modules-overview)
+- [Key Features 🔑](#key-features-🔑)
+- [System Flow ⚙️](#system-flow-⚙️)
+- [Modules Overview 🔍](#modules-overview-🔍)
 - [How to Get Started](#how-to-get-started)
 
 ---
