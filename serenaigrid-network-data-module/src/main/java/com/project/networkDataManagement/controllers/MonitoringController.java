@@ -28,13 +28,6 @@ public class MonitoringController {
 		this.restTemplate = restTemplate;
 	}
 
-//    @GetMapping("/network/{networkId}")
-//    public ResponseEntity<ApiResponse<MonitoringDataDO>> getNetworkMonitoring(@PathVariable("networkId") String networkId) {
-//    	
-//        ApiResponse<MonitoringDataDO> response = monitoringService.collectMonitoringData(networkId);
-//        return ResponseEntity.status(response.isSuccess() ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-//    }
-
 	@GetMapping("/network/{networkId}")
 	public ResponseEntity<ApiResponse<MonitoringDataDO>> getNetworkMonitoring(@PathVariable("networkId") String networkId) {
 
