@@ -91,7 +91,7 @@ def save_combined_data():
 def run_greedy_algorithm():
     try:
         result = subprocess.run(
-            ['python', 'greedy_algorithm.py'],
+            ['python', 'greedyAlgorithm.py'],
             capture_output=True,
             text=True
         )
@@ -109,7 +109,7 @@ def run_greedy_algorithm():
 def run_llama_report():
     try:
         result = subprocess.run(
-            ['python', 'llama_report.py'],
+            ['python', 'llama3.py'],
             capture_output=True,
             text=True
         )
