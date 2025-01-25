@@ -2,11 +2,22 @@
 
 Harmonizing healthcare connectivity through AI-driven intelligence and innovation.
 
-## Project Overview
+---
+
+## Quick Links
+- [Project Overview](#project-overview)
+- [Key Features](#key-features)
+- [System Flow](#system-flow)
+- [Modules Overview](#modules-overview)
+- [How to Get Started](#how-to-get-started)
+
+---
+
+## Project Overview 🎯
 
 The **SerenAiGrid** project aims to optimize healthcare resource management by leveraging Artificial Intelligence (AI) and Large Language Models (LLMs). The system is designed to dynamically allocate network resources in health centers and automate medical documentation processes.
 
-### Key Features
+### Key Features 🔑
 
 - **Dynamic Bandwidth Allocation:** Ensures network prioritization for telemedicine systems or emergency services during congestion.
 - **Automated Procurement Documentation:** Generates documents for public tenders and health procurement, streamlining decision-making.
@@ -14,25 +25,25 @@ The **SerenAiGrid** project aims to optimize healthcare resource management by l
 
 ---
 
-## System Flow
+## System Flow ⚙️
 
 ### Data Input
 - **Network:** Real-time data on network status, bandwidth usage, and congestion.
 - **Health:** Priority requests for telemedicine or emergencies.
 
 ### Processing
-- AI evaluates the input data and redistributes network resources dynamically.
+- Evaluation of input data the input data and redistributes network resources dynamically.
 - LLM generates clear, understandable documentation regarding these decisions.
 
 ### Output
-- **Notifications:** Real-time updates via a dashboard.
+- **Notifications:** Real-time updates via a dashboard (future prop).
 - **Reports:** Storage of structured and unstructured reports for future use.
 
 ---
 
-## Modules Overview
+## Modules Overview 🔍
 
-### 1. Data Collection (Network Data Simulation)
+### 1. Data Collection (Network Data Simulation) 🌐
 
 The module `serenaigrid-network-data-module` handles the simulation of network data by registering and monitoring networks (LAN or WAN).
 
@@ -43,14 +54,21 @@ The module `serenaigrid-network-data-module` handles the simulation of network d
   - Service: `NetworkService`.
 
 - **Network Simulation:**
-  - Simulates data such as IP addresses, bandwidth usage, and latency for registered networks.
+  - Simulates data such as IP addresses, bandwidth usage, and latency for registered networks (both LAN and WAN).
   - Data is sent to a Python server (`serenaigrid-ai-data-processing-module`) for further AI-based processing.
   - Service: `NetworkSimulatorService`.
 
 #### APIs
 - **Register a Network:**
   `POST http://localhost:8081/spring-boot-network/network/register`
-  Data: Network name, type (LAN/WAN), number of nodes, description.
+    **Example Payload:**
+  ```json
+  {
+    "name": "Hospital LAN",
+    "type": "LAN",
+    "nodes": 50,
+    "description": "Local Area Network for hospital systems."
+  }
 
 - **List Registered Networks:**
   `GET http://localhost:8081/spring-boot-network/network/list`
@@ -60,7 +78,7 @@ The module `serenaigrid-network-data-module` handles the simulation of network d
 
 - **Monitor Network Data:**
   `GET http://localhost:8081/spring-boot-network/monitoring/network/{networkId}`
-  Description: Simulates network data (e.g., bandwidth usage, IP addresses, latency) for the specified network identified by `networkId`.
+  - **Description:** Simulates network data (e.g., bandwidth usage, IP addresses, latency) for the specified network identified by `networkId`.
 
 #### Simulation Details
 - **IP Address:**
@@ -77,30 +95,30 @@ The module `serenaigrid-network-data-module` handles the simulation of network d
 
 ---
 
-### 2. Data Collection (Medical Data Simulation)
+### 2. Data Collection (Medical Data Simulation) 🩺
 
 The module `serenaigrid-medical-data-module` simulates medical data using the FHIR (Fast Healthcare Interoperability Resources) standard to support medical emergencies, telemedicine sessions, and device management.
 
 #### Features
 - **FHIR Data Generation:**
-  - Simulates medical emergencies (e.g., cardiac arrest, allergic reactions) with FHIR `Observation` resources.
+  - Simulates medical emergencies (e.g., cardiac arrest, allergic reactions, stroke event) with FHIR `Observation` resources.
   - Generates telemedicine sessions, including QoS metrics (latency and bandwidth).
-  - Simulates medical devices (e.g., ventilators, ECG monitors), assigning custom properties and statuses.
+  - Simulates medical devices (e.g., ventilators, ECG monitors), assigning custom properties and statuses (ACTIVE-INACTIVE).
 
 - **Service:** `FHIRDataGeneratorService`.
 
 #### APIs
 - **Retrieve Server Metadata:**
   `GET http://localhost:8080/spring-boot-hapi-fhir/metadata`
-  Description: Returns the metadata of the FHIR server.
+  - **Description:** Returns the metadata of the FHIR server.
 
 - **Create a Bundle:**
   `POST http://localhost:8080/spring-boot-hapi-fhir/Bundle`
-  Description: Creates a FHIR Bundle containing simulated medical data (e.g., emergencies, telemedicine sessions, devices).
+  - **Description:** Creates a FHIR Bundle containing simulated medical data (e.g., emergencies, telemedicine sessions, devices).
 
 - **Retrieve a Bundle:**
   `GET http://localhost:8080/spring-boot-hapi-fhir/Bundle/{id}`
-  Description: Retrieves the details of a specific FHIR Bundle by its unique identifier (`id`).
+  - **Description:** Retrieves the details of a specific FHIR Bundle by its unique identifier (`id`).
 
 #### Flow of Use
 1. **Bundle Creation:**
@@ -108,11 +126,11 @@ The module `serenaigrid-medical-data-module` simulates medical data using the FH
    - Service: `BundleProvider`.
 
 2. **Python Processing:**
-   - The Bundle is sent to a Python server (`serenaigrid-ai-data-processing-module`) for AI-based processing before being returned to the client.
+   - The Bundle is sent to a Python server (`serenaigrid-ai-data-processing-module`) for AI-based processing.
 
 ---
 
-### 3. Artificial Intelligence Module
+### 3. Artificial Intelligence Module 🧠
 
 The module `serenaigrid-ai-data-processing-module` is responsible for processing and optimizing both medical and network data received from the Spring Boot simulators. By leveraging AI algorithms, the module dynamically allocates network resources and generates documentation in PDF format, tailored to the needs of healthcare teams. The module is divided into three core Python files that implement Flask-based data reception, AI-driven optimization, and PDF report generation.
 
@@ -122,7 +140,7 @@ The module `serenaigrid-ai-data-processing-module` is responsible for processing
   - Combines the data and stores it in JSON format for analysis and decision-making.
 
 - **Dynamic Bandwidth Allocation Optimization:**
-  - Implements a greedy algorithm to optimize network bandwidth allocation based on medical priorities (e.g., emergencies, telemedicine sessions).
+  - Implements a Greedy Algorithm to optimize network bandwidth allocation based on medical priorities (e.g., emergencies, telemedicine sessions).
   - Adjusts bandwidth allocation dynamically according to the Quality of Service (QoS) requirements of the medical services.
 
 - **Report Generation:**
@@ -148,7 +166,7 @@ The module `serenaigrid-ai-data-processing-module` is responsible for processing
     - Optimized network resource allocation details saved in result.json, including:
       - Managed and unmet emergencies.
       - Initial and final bandwidth allocations for the network and individual nodes.
-  - Visualization::
+  - Visualization:
     - Graphical representation of resource allocation before and after optimization.
 
 - `llama3.py`
@@ -158,7 +176,7 @@ The module `serenaigrid-ai-data-processing-module` is responsible for processing
     - Emergency management reports.
     - General operational reports.
   - Report Generation:
-    - Generates PDF reports using the FPDF library, tailored to user specifications.
+    - Generates PDF reports using the `FPDF library`, tailored to user specifications.
   - Input:
     - The user selects the report type, and related data is passed to the LLM for processing.
   - Output:
@@ -167,11 +185,11 @@ The module `serenaigrid-ai-data-processing-module` is responsible for processing
 #### Additional Files
 - `data_received.json`
   - Example of the combined medical and network data received from the Spring Boot simulators.
-  - The medical data follows the FHIR standard, and the network data includes details like node bandwidth and latency.
+  - The medical data follows the FHIR standard, and the network data includes details like node, bandwidth and latency.
 
 - `result.json`
   - Example of the optimization result from the `greedyAlgorithm.py` module.
-  - The medical data follows the FHIR standard, and the network data includes details like node bandwidth and latency.
+  - The JSON provides an overview of network resource allocation for medical emergencies and telemedicine sessions, summarizing handled and unhandled emergencies, initial and remaining bandwidth, and bandwidth allocation changes across nodes.
 
 - `generated_report.pdf`
   - Example of a PDF report generated by the AI module using the "Emergency" template.
@@ -185,7 +203,11 @@ The module `serenaigrid-ai-data-processing-module` is responsible for processing
 - **Python** (3.10.11)
 - Required libraries (see individual module documentation).
 
-### Steps
-1. Clone the repository:
+### Steps 🧗
+1. 👉 Clone the repository:
    ```bash
    git clone https://github.com/Serenella97325/connectivity-hackathon-serenAiGrid.git
+2. 👉 Start the Spring Boot server for network and FHIR simulation.
+3. 👉 Run the Python server for AI processing:
+   ```bash
+   python3 server.py
