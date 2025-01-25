@@ -219,6 +219,6 @@ The module `serenaigrid-ai-data-processing-module` is responsible for processing
 
 ---
 
-## <h2 id=contributors">✨ Contributors</h2>
+## <h2 id="contributors">✨ Contributors</h2>
 
 - **Serenella97325** - Lead Developer and Project Coordinator
