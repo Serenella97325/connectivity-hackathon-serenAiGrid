@@ -167,7 +167,9 @@ The module `serenaigrid-ai-data-processing-module` is responsible for processing
       - Managed and unmet emergencies.
       - Initial and final bandwidth allocations for the network and individual nodes.
   - Visualization:
-    - Graphical representation of resource allocation before and after optimization.
+    - Graphical representation of resource allocation.
+    ![Timeline of Bandwidth Allocation in terms of QoS per Emergency with Node Information](images/timelineBandwidthAllocation.png)
+    ![Bandwidth Distribution Across Nodes](images/nodeHeatmap.png)
 
 - `llama3.py`
   - Interacts with the Llama3-based model via the Ollama API to generate context-aware reports.
