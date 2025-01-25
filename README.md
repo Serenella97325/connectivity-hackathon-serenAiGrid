@@ -5,19 +5,19 @@ Harmonizing healthcare connectivity through AI-driven intelligence and innovatio
 ---
 
 ## Quick Links
-- [Project Overview 🎯](#project-overview)
-- [Key Features 🔑](#key-features)
-- [System Flow ⚙️](#system-flow)
-- [Modules Overview 🔍](#modules-overview)
+- [Project Overview](#project-overview)
+- [Key Features](#key-features)
+- [System Flow](#system-flow)
+- [Modules Overview](#modules-overview)
 - [How to Get Started](#how-to-get-started)
 
 ---
 
-## Project Overview 🎯
+## <h2 id="project-overview">🎯 Project Overview</h2>
 
 The **SerenAiGrid** project aims to optimize healthcare resource management by leveraging Artificial Intelligence (AI) and Large Language Models (LLMs). The system is designed to dynamically allocate network resources in health centers and automate medical documentation processes.
 
-### Key Features 🔑
+### <h2 id="key-features">🔑 Key Features</h2>
 
 - **Dynamic Bandwidth Allocation:** Ensures network prioritization for telemedicine systems or emergency services during congestion.
 - **Automated Procurement Documentation:** Generates documents for public tenders and health procurement, streamlining decision-making.
@@ -25,7 +25,7 @@ The **SerenAiGrid** project aims to optimize healthcare resource management by l
 
 ---
 
-## System Flow ⚙️
+## <h2 id="system-flow">⚙️ System Flow</h2> 
 
 ### Data Input
 - **Network:** Real-time data on network status, bandwidth usage, and congestion.
@@ -41,7 +41,7 @@ The **SerenAiGrid** project aims to optimize healthcare resource management by l
 
 ---
 
-## Modules Overview 🔍
+## <h2 id="modules-overview">⚙️ Modules Overview</h2>  🔍
 
 ### 1. Data Collection (Network Data Simulation) 🌐
 
