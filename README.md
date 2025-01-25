@@ -5,7 +5,7 @@ Harmonizing healthcare connectivity through AI-driven intelligence and innovatio
 ---
 
 ## Quick Links
-- [Project Overview](#project-overview)
+- [Project Overview 🎯](#project-overview-🎯)
 - [Key Features](#key-features)
 - [System Flow](#system-flow)
 - [Modules Overview](#modules-overview)
@@ -207,7 +207,9 @@ The module `serenaigrid-ai-data-processing-module` is responsible for processing
 1. 👉 Clone the repository:
    ```bash
    git clone https://github.com/Serenella97325/connectivity-hackathon-serenAiGrid.git
+
 2. 👉 Start the Spring Boot server for network and FHIR simulation.
+
 3. 👉 Run the Python server for AI processing:
    ```bash
    python3 server.py
