@@ -9,6 +9,7 @@ Harmonizing healthcare connectivity through AI-driven intelligence and innovatio
 - [Key Features](#key-features)
 - [System Flow](#system-flow)
 - [Modules Overview](#modules-overview)
+- [How to Get Started](#how-to-get-started)
 - [Contributors](#contributors)
 
 ---
@@ -218,6 +219,6 @@ The module `serenaigrid-ai-data-processing-module` is responsible for processing
 
 ---
 
-<h2 id=contributors">✨ Contributors</h2>
+## <h2 id=contributors">✨ Contributors</h2>
 
 - **Serenella97325** - Lead Developer and Project Coordinator
