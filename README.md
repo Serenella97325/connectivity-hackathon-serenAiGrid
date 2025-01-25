@@ -41,7 +41,7 @@ The **SerenAiGrid** project aims to optimize healthcare resource management by l
 
 ---
 
-## <h2 id="modules-overview">⚙️ Modules Overview</h2>  🔍
+## <h2 id="modules-overview">🔍 Modules Overview</h2>  
 
 ### 1. Data Collection (Network Data Simulation) 🌐
 
